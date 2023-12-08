@@ -1,2 +1,57 @@
-<h1>Admin::Items#new</h1>
-<p>Find me in app/views/admin/items/new.html.erb</p>
+<div class="text-center">
+  商品新規登録
+</div>
+<div class="container">
+  <%= form_with url: admin_items_path do |f| %>
+    <div class="row">
+      <div class="col">
+        <h5>商品画像</h5>
+      </div>
+      <div class="col">
+        <%= f.file_field :image %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>商品名</h5>
+      </div>
+      <div class="col">
+        <%= f.text_field :name, placeholder: "商品名", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>商品説明</h5>
+      </div>
+      <div class="col">
+        <%= f.text_area :product_description, placeholder: "ここに説明文を記述します", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>ジャンル</h5>
+      </div>
+      <div class="col">
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択して下さい--", class: "form-control custom-select" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>税抜価格</h5>
+      </div>
+      <div class="col">
+        <%= f.text_field :tax_included_price, placeholder: "1,000", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>販売ステータス</h5>
+      </div>
+      <div class="col">
+        <%= f.radio_button :is_sales, "販売中" %>
+        <%= f.radio_button :is_sales, "販売停止中" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
