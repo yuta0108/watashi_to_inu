@@ -1,2 +1,32 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
+                                    <!--スライドやアニメーションの演出  <!--自動的にカルーセルのスライドが開始,2秒で切り替わる-->-->
+        <div class="carousel-inner"><!-- スライドが配置されるコンテナ -->
+          <div class="carousel-item active"><!-- 最初のスライドには `active` -->
+            <%= image_tag("chiwa.jpg", class: "d-block mx-auto w-100", alt: "Centered Image") %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag("hot.jpg", class: "d-block mx-auto w-100") %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag("ore.jpg", class: "d-block mx-auto w-100") %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag("tennai-1.jpg", class: "d-block mx-auto w-100") %>
+          </div>
+        </div>
+        <!-- スライドを制御 -->
+        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
