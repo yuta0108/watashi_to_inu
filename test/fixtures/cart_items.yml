@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item_id: 1
+  customer_id: 1
+  amount: 1
+  receipt_date: 1
+  receipt_date_time: 1
+
+two:
+  item_id: 1
+  customer_id: 1
+  amount: 1
+  receipt_date: 1
+  receipt_date_time: 1

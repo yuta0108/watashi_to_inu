@@ -1,0 +1,11 @@
+ja:
+  enums:
+    order:
+      payment_method:
+        credit_card: "クレジットカード"
+        pay_store: "店舗支払い"
+    order_detail:
+      production_status:
+        waiting: "製作待ち"
+        production: "製作中"
+        completed: "製作完了"
