@@ -1,2 +1,79 @@
-<h1>Admin::Items#edit</h1>
-<p>Find me in app/views/admin/items/edit.html.erb</p>
+<div class="text-center my-5">
+  <h3>商品編集</h3>
+</div>
+<div class="container">
+  <%= form_with model: @item, url: admin_item_path(@item), method: :patch do |f| %>
+    <div class="row justify-content-center">
+      <div class="col-2">
+        <h5>商品画像</h5>
+      </div>
+      <div class="col-3 mb-4">
+        <%= f.file_field :image %>
+      </div>
+      <div class="col-1"></div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-2">
+        <h5>商品名</h5>
+      </div>
+      <div class="col-3 mb-4">
+        <%= f.text_field :name, placeholder: "商品名", class: "form-control" %>
+      </div>
+      <div class="col-1"></div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-2">
+        <h5>商品説明</h5>
+      </div>
+      <div class="col-3 mb-4">
+        <%= f.text_area :product_description, rows: "4", placeholder: "ここに説明文を記述します", class: "form-control" %>
+      </div>
+      <div class="col-1"></div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-2">
+        <h5>ジャンル</h5>
+      </div>
+      <div class="col-4 mb-4">
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択して下さい--", class: "form-control custom-select" %>
+                                                      <!--各オプションの値と表示テキストを指定-->
+      <div class="col-1"></div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-2">
+        <h5>税抜価格</h5>
+      </div>
+      <div class="col-3">
+        <%= f.text_field :tax_included_price, placeholder: "1,000", class: "form-control" %>
+      </div>
+      <div class="col-1">
+        <h6>円</h6>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-2 mt-3">
+        <h5>販売ステータス</h5>
+      </div>
+      <div class="col-3 mt-3">
+        <%= f.label :is_saled_true, { value: :true } do %>
+        <!--:value`オプションに`:true`を指定-->
+          <%= f.radio_button :is_sales, true %>
+          販売中
+        <% end %>
+
+        <%= f.label :is_saled_false, { value: :false } do %>
+        <!--:value`オプションに`:false`を指定-->
+          <%= f.radio_button :is_sales, false %>
+          販売停止中
+        <% end %>
+      </div>
+      <div class="col-1"></div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-3 mt-3 ml-5">
+        <%= f.submit "変更を保存", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>

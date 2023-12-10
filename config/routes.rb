@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :orders, omly: [:show]
     resources :customers, only: [:index, :edit]
     resources :genres, only: [:index, :create,  :update, :edit]
-    resources :items, only: [:new, :show, :index, :edit]
+    resources :items, only: [:new, :show, :index, :edit, :create, :update]
     resources :customers, only: [:index, :edit]
     get '/' => 'customers#index'
   end

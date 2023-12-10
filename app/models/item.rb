@@ -1,3 +1,16 @@
 class Item < ApplicationRecord
-  has_one_attached :image  
+
+# 同じバリデーション条件を持つ属性をまとめる
+  with_options presence: true do
+      validates :name
+      validates :product_description
+      validates :tax_included_price
+      validates :image
+  end
+
+  belongs_to :genre
+  has_many :orders
+  has_many :cart_items
+
+  has_one_attached :image
 end
