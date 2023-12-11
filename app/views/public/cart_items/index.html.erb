@@ -1,2 +1,63 @@
-<h1>Public::CartItems#index</h1>
-<p>Find me in app/views/public/cart_items/index.html.erb</p>
+<div class="text-center my-5">
+  <h3>ショッピングカート</h3>
+</div>
+<div class="container">
+  <% if customer_signed_in? %>
+  <div class="row-10 justify-content-center">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th style="width: 25%; background-color: #dee2e6;">お受け取り日</th>
+          <td style="width: 25%;"><input type="date" value="<%= Time.now.strftime('%Y-%m-%d') %>"></td>
+          <!--value="今日の日付-->
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th style="width: 25%; background-color: #dee2e6;">お受け取り可能時間</th>
+          <td style="width: 25%;">
+            <input type="time" min="09:00" max="22:00">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <%= form_with model: @cart_item, url: public_cart_items_destroy_all_path do |f| %>
+    <div class="row">
+      <div class="col-3 mt-4 ml-auto">
+        <%= f.submit "カートを空にする", class: "btn btn-danger" %>
+      </div>
+    </div>
+  <% end %>
+  <table class="table table-bordered">
+    <thead>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+    <% if @cart_items.present? %>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= image_tag cart_item.image, class: "w-100"  %><%= cart_item.name %></td>
+          <td><%= number_to_currency(with_tax_price) %>円</td>
+            <%= form_with model: @cart_item, url: public_cart_item_path, method: :patch,local: true do |f| %>
+              <td><%= f.hidden_field :item_id, value: cart_item.item.id %>
+              <!--ユーザには表示されない情報`:item_id`パラメータ名を指定：`value: cart_item.item.id`は、隠しフィールドの初期値を指定-->
+              <%= cart_item.amount %></td>
+            <% end %>
+          <td><%= number_to_currency(with_tax_price * cart_item.amount) %>円</td>
+          <td><%= button_to "変更する", edit_public_cart_item_path(cart_item), method: :get, class: "btn btn-success" %></td>
+          <td><%= button_to "削除する", public_cart_item, method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="6">商品は入っていません。</td>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>

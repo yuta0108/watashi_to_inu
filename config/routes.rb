@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   namespace :public do
     resources :orders, only: [:confirm, :show, :index, :thanks]
     resources :items, only: [:show, :index,]
-    resources :cart_items, only: [:index]
+    resources :cart_items, only: [:index, :destroy, :update, :create]
+      delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :customers, only: [:show, :edit]
       get 'customers/my_page' => 'customers#show'
     resources :items, only: [:new, :show, :index, :edit]
