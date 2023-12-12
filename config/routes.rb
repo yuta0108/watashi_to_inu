@@ -3,11 +3,10 @@ Rails.application.routes.draw do
   root to: 'public/homes#top'
 
   namespace :admin do
-    resources :orders, omly: [:show]
+    resources :orders, only: [:index, :update, :show]
     resources :customers, only: [:index, :edit]
     resources :genres, only: [:index, :create,  :update, :edit]
     resources :items, only: [:new, :show, :index, :edit, :create, :update]
-    resources :customers, only: [:index, :edit]
     get '/' => 'customers#index'
   end
 
@@ -16,7 +15,7 @@ Rails.application.routes.draw do
     resources :items, only: [:show, :index,]
     resources :cart_items, only: [:index, :destroy, :update, :create]
       delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
-    resources :customers, only: [:show, :edit]
+    resources :customers, only: [:show, :edit, :update]
       get 'customers/my_page' => 'customers#show'
     resources :items, only: [:new, :show, :index, :edit]
     get 'homes/about' => 'homes#about', as: '/about'
