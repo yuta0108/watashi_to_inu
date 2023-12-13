@@ -6,23 +6,24 @@
   <div class="row justify-content-center">
     <div class="col-6">
       <table class="table table-bordered">
-        <%= form_with model: @cart_item, url: public_cart_item_path(cart_item.id), method: :patch, local: true do |f| %>
-        <thead>
-          <tr>
-            <th style="width: 25%; background-color: #dee2e6;">お受け取り日</th>
-            <td style="width: 25%;"><%= f.date_field :receipt_date %></td>
-            <!--value="今日の日付-->
-          </tr>
-        </thead>
+        <% if @cart_item.present? %>
+          <%= form_with model: @cart_item, url: public_cart_item_path(@cart_item.id), method: :patch, local: true do |f| %>
+          <thead>
+            <tr>
+              <th style="width: 25%; background-color: #dee2e6;">お受け取り日</th>
+              <td style="width: 25%;"><%= f.date_field :receipt_date %></td>
+              <!--value="今日の日付-->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="width: 25%; background-color: #dee2e6;">お受け取り可能時間</th>
+              <td style="width: 25%;"><%= f.time_field :receipt_date %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
         <% end %>
-        <tbody>
-          <tr>
-            <th style="width: 25%; background-color: #dee2e6;">お受け取り可能時間</th>
-            <td style="width: 25%;">
-              <input type="time" min="09:00" max="17:00">
-            </td>
-          </tr>
-        </tbody>
       </table>
     </div>
   </div>
@@ -47,13 +48,15 @@
           <td><%= image_tag cart_item.item.image, style: "width: 60px;" %>　<%= cart_item.item.name %></td>
           <td><%= cart_item.item.with_tax_price %>円</td>
             <%= form_with model: @cart_item, url: public_cart_item_path(cart_item.id), method: :patch, local: true do |f| %>
-              <td><%= f.hidden_field :item_id, value: cart_item.item.id %>
               <!--ユーザには表示されない情報`:item_id`パラメータ名を指定：`value: cart_item.item.id`は、隠しフィールドの初期値を指定-->
-              <%= f.number_field :amount, value: cart_item.amount, class: 'form-control' %></td>
+              <td><%= f.hidden_field :item_id, value: cart_item.item.id %>
+                  <%= f.number_field :amount, value: cart_item.amount, class: 'form-control' %>
+              </td>
+              <td><%= cart_item.item.with_tax_price * cart_item.amount %>円</td>
+              <td><%= f.submit "変更する", class: "btn btn-success" %></td>
             <% end %>
-          <td><%= cart_item.item.with_tax_price * cart_item.amount %>円</td>
-          <td><%= button_to "変更する", public_cart_item_path(cart_item.id), method: :patch, class: "btn btn-success" %></td>
-          <td><%= button_to "削除する", public_cart_item_path(cart_item.id), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-danger" %></td>
+
+          <td><%= button_to "削除する", public_cart_item_path(cart_item), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-danger" %></td>
         </tr>
       <% end %>
     <% else %>
@@ -82,9 +85,11 @@
       <% end %>
     </div>
     <div class="row justify-content-center">
-      <div class="col-2 mt-3">
-        <%= link_to "注文手続きに進む", public_order_path(@cart_items), class: "btn btn-success" %>
-      </div>
+      <% if @cart_items.present? %>
+        <div class="col-2 mt-3">
+          <%= link_to "注文手続きに進む", public_order_path(@cart_items), class: "btn btn-success" %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>

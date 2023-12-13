@@ -3,9 +3,13 @@ class Public::CartItemsController < ApplicationController
   before_action :set_cart_item, only: [:create, :update]
 
   def index
+
     @cart_items = current_customer.cart_items.all
-    @cart_item = current_customer.cart_items.find(params[:id])
+    if params[:id].present?
+      @cart_item = current_customer.cart_items.find(params[:id])
+    end
     @total = @cart_items.sum { |cart_item| cart_item.amount * cart_item.item.tax_included_price }
+
   end
 
   def create
@@ -15,33 +19,30 @@ class Public::CartItemsController < ApplicationController
       @cart_item.amount += params[:cart_item][:amount].to_i
       # `@cart_item.amount`に`params[:cart_item][:amount].to_i`の値を加算
       @cart_item.save
-      redirect_to public_cart_items_path
+      # redirect_to public_cart_items_path(id: @cart_item.id)
     else
       cart_item = CartItem.new(cart_item_params)
       cart_item.customer_id = current_customer.id
       cart_item.save
-      redirect_to public_cart_items_path
+      # redirect_to public_cart_items_path
     end
-
+    redirect_to public_cart_items_path
   end
 
   def destroy_all
     cart_items = current_customer.cart_items
     cart_items.destroy_all
-    redirect_to public_cart_items_path(current_customer)
+    redirect_to public_cart_items_path
   end
 
   def destroy
     delete_cart_item = CartItem.find(params[:id])
     delete_cart_item.destroy
-    redirect_to public_cart_items_path(current_customer)
+    redirect_to public_cart_items_path
   end
 
-
-
   def update
-    @cart_item = current_customer.cart_items.find_by(item_id: params[:item_id])
-
+    @cart_item = current_customer.cart_items.find(params[:id])
     if @cart_item
       if @cart_item.update(amount: params[:amount].to_i)
         flash[:notice] = '更新されました'
@@ -52,7 +53,7 @@ class Public::CartItemsController < ApplicationController
       flash[:alert] = 'カートアイテムが見つかりません'
     end
 
-    redirect_to public_cart_items_path(current_customer)
+    redirect_to public_cart_items_path
   end
 
   def sum_of_price
