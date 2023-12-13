@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2023_12_07_121859) do
     t.integer "item_id", null: false
     t.integer "customer_id", null: false
     t.integer "amount", null: false
+    t.integer "receipt_date"
+    t.integer "receipt_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

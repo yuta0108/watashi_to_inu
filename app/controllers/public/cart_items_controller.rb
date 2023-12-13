@@ -1,9 +1,10 @@
 class Public::CartItemsController < ApplicationController
 
-  before_action :set_cart_item, only: [:create, :update,]
+  before_action :set_cart_item, only: [:create, :update]
 
   def index
     @cart_items = current_customer.cart_items.all
+    @cart_item = current_customer.cart_items.find(params[:id])
     @total = @cart_items.sum { |cart_item| cart_item.amount * cart_item.item.tax_included_price }
   end
 
@@ -39,11 +40,18 @@ class Public::CartItemsController < ApplicationController
 
 
   def update
-    if @cart_item.update(amount: params[:amount].to_i)
-      flash[:notice] = '更新されました'
+    @cart_item = current_customer.cart_items.find_by(item_id: params[:item_id])
+
+    if @cart_item
+      if @cart_item.update(amount: params[:amount].to_i)
+        flash[:notice] = '更新されました'
+      else
+        flash[:alert] = '更新に失敗しました'
+      end
     else
-      flash[:alert] = '更新に失敗しました'
+      flash[:alert] = 'カートアイテムが見つかりません'
     end
+
     redirect_to public_cart_items_path(current_customer)
   end
 
@@ -52,7 +60,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def set_cart_item
-    @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+    @cart_item = current_customer.cart_items.find_by(item_id: params[:item_id])
   end
 
   private
@@ -60,7 +68,5 @@ class Public::CartItemsController < ApplicationController
   def cart_item_params
       params.require(:cart_item).permit(:item_id, :amount)
   end
-
-
 
 end

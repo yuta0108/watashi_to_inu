@@ -1,0 +1,33 @@
+<div class="text-center my-5">
+  <h3>注文履歴一覧</h3>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>購入日時</th>
+            <th>氏名</th>
+            <th>注文個数</th>
+            <th>受け取りステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M'), admin_order_path(order) %></td>
+              <td>
+                <%= link_to admin_order_path(customer.id) do %>
+                  <%= order.first_name %> <%= order.last_name %>
+                <% end %>
+              </td>
+              <td><%= order.order_details.sum(:amount) %></td>
+              <td><%= order.is_receipt_i18n %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

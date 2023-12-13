@@ -6,18 +6,20 @@
   <div class="row justify-content-center">
     <div class="col-6">
       <table class="table table-bordered">
+        <%= form_with model: @cart_item, url: public_cart_item_path(cart_item.id), method: :patch, local: true do |f| %>
         <thead>
           <tr>
             <th style="width: 25%; background-color: #dee2e6;">お受け取り日</th>
-            <td style="width: 25%;"><input type="date" value="<%= Time.now.strftime('%Y-%m-%d') %>"></td>
+            <td style="width: 25%;"><%= f.date_field :receipt_date %></td>
             <!--value="今日の日付-->
           </tr>
         </thead>
+        <% end %>
         <tbody>
           <tr>
             <th style="width: 25%; background-color: #dee2e6;">お受け取り可能時間</th>
             <td style="width: 25%;">
-              <input type="time" min="09:00" max="22:00">
+              <input type="time" min="09:00" max="17:00">
             </td>
           </tr>
         </tbody>
