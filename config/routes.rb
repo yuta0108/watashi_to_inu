@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   namespace :public do
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
-    resources :orders, only: [:confirm, :show, :index, :thanks]
+      get 'orders/thanks' => 'orders#thanks'
+      get 'orders/confirm' => 'orders#confirm'
+    resources :orders, only: [:show, :index]
     resources :items, only: [:show, :index,]
     resources :cart_items, only: [:index, :destroy, :update, :create]
 

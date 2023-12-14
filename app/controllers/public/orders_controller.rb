@@ -1,5 +1,6 @@
 class Public::OrdersController < ApplicationController
   def confirm
+    @order = current_customer.orders
   end
 
   def thanks
@@ -9,6 +10,5 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.new
   end
 end

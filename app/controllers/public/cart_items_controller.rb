@@ -5,10 +5,10 @@ class Public::CartItemsController < ApplicationController
   def index
 
     @cart_items = current_customer.cart_items.all
-    if params[:id].present?
-      @cart_item = current_customer.cart_items.find(params[:id])
-    end
+    # customer:cart_items = 1:n sの複数形
+    @order = Order.new
     @total = @cart_items.sum { |cart_item| cart_item.amount * cart_item.item.tax_included_price }
+    # `sum`メソッドは、各要素に対してブロック内の処理を行い、その結果を合計する,`@cart_items`の各要素を1つずつ取り出す
 
   end
 
@@ -19,12 +19,10 @@ class Public::CartItemsController < ApplicationController
       @cart_item.amount += params[:cart_item][:amount].to_i
       # `@cart_item.amount`に`params[:cart_item][:amount].to_i`の値を加算
       @cart_item.save
-      # redirect_to public_cart_items_path(id: @cart_item.id)
     else
       cart_item = CartItem.new(cart_item_params)
       cart_item.customer_id = current_customer.id
       cart_item.save
-      # redirect_to public_cart_items_path
     end
     redirect_to public_cart_items_path
   end
