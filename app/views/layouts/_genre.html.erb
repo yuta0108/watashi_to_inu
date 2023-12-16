@@ -7,11 +7,9 @@
   <tbody>
     <% genres.each do |genre| %>
     <tr>
-      <% if genre.respond_to?(:is_active) && genre.is_active == true %>
-      <td>         <!--`genre`オブジェクトが`is_active`というメソッドを持っている場合にのみ実行される条件文です。-->
-        <%= link_to genre.name, public_items_path(genre_id: genre.id), class: "text-primary" %>
-      </td>                    <%# items_pathに引数としてgenre_idを渡す %>
-      <% end %>
+      <td>
+        <%= link_to genre.name,  public_items_path(genre_id: genre.id), method: :get, class: "text-decoration-none text-dark" %>
+      </td>
     </tr>
     <% end %>
   </tbody>

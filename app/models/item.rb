@@ -16,6 +16,10 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "genre_id", "id", "is_sales", "name", "product_description", "tax_included_price", "updated_at"]
+  end
+
   # 消費税を求めるメソッド
   def with_tax_price
     (tax_included_price * 1.1).floor

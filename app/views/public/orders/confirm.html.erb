@@ -13,9 +13,35 @@
       </table>
     </div>
   </div>
-  <div class="row">
+  <div class="row text-center">
     <div class="col">
-      <%= @order.receipt_date %><%= @order.receipt_date %>
+      <%= @order[:receipt_date] %><br><%= @order[:receipt_time] %>
     </div>
+  </div>
+  <div class="col-9 ml-auto">
+    
+    <div class="row">
+      <div class="col-5">
+        <%= image_tag @item.image, class: "w-100" %>
+      </div>
+      <div class="col-5 mx-auto">
+        <h5><%= @item.name %></h5>
+        <div class="row">
+          <div class="col-10 my-4">
+            税込：<%= (@item.tax_included_price * 1.1).floor %>円
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-10 mb-4">
+            数量：<%= @order[:amount] %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-10 mb-4">
+            小計：<%= @item.with_tax_price * @order[:amount].to_i  %>円
+          </div>
+        </div>
+      </div>
+     </div>
   </div>
 </div>

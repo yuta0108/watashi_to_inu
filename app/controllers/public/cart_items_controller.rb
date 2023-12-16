@@ -13,6 +13,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
+
     @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
     if @cart_item.present?
       #存在している確認

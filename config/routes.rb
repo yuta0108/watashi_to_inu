@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   root to: 'public/homes#top'
 
+  devise_scope :customer do
+    post "customers/guest_sign_in", to: "public/sessions#guest_sign_in"
+  end
+
   namespace :admin do
+    get "search" => "searches#search"
     resources :orders, only: [:index, :update, :show]
     resources :customers, only: [:index, :edit]
     resources :genres, only: [:index, :create,  :update, :edit]
@@ -11,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
+    get "search" => "searches#search"
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
       get 'orders/thanks' => 'orders#thanks'
       get 'orders/confirm' => 'orders#confirm'

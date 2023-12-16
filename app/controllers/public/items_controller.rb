@@ -1,5 +1,6 @@
 class Public::ItemsController < ApplicationController
   def index
+    
     @items = Item.all
     @genres = Genre.all
     if params[:genre_id].present?
@@ -10,6 +11,7 @@ class Public::ItemsController < ApplicationController
   end
 
   def show
+    @customer = current_customer
     @item = Item.find(params[:id])
     @genres = Genre.all
     @cart_item = CartItem.new

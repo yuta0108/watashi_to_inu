@@ -26,6 +26,7 @@
           <% if customer_signed_in? %>
             <%= form_with model: @cart_item, url: public_cart_items_path,method: :post,local:true do |f| %>
               <div class="row">
+                <% unless @customer.guest_customer? %>
                 <div class="col-6">
                   <%= f.hidden_field :item_id, value: @item.id %>
                   <%= f.select :amount, (1..30).to_a, { include_blank: '個数選択' }, class: 'form-control' %>
@@ -34,6 +35,7 @@
                 <div class="col-5">
                   <%= f.submit "カートに追加", class: "btn btn-success" %>
                 </div>
+                <% end %>
               </div>
             <% end %>
           <% end %>

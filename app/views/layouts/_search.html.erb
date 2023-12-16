@@ -1,0 +1,16 @@
+<% if controller_name != 'sessions' %>
+<!--「controller_name」が「sessions」ではない場合に実行-->
+<div class="search_form">
+  <%= search_form_for @q, url: public_search_path do |f| %>
+    <div class="col-md-8 ml-auto">
+      <%= f.search_field :name_cont, class: "form-control" %>
+                          <!--_cont contains value 部分一致-->
+    </div>
+    <div class="col-md-8 ml-auto">
+    <%= button_tag type: "submit", class: 'btn btn-outline-success' do %>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    <% end %>
+    </div>
+  <% end %>
+</div>
+<% end %>

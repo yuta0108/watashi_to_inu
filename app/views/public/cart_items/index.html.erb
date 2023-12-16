@@ -19,7 +19,7 @@
           <tbody>
             <tr>
               <th style="width: 25%; background-color: #dee2e6;">お受け取り可能時間</th>
-              <td style="width: 25%;"><%= f_order.time_field :receipt_date %>
+              <td style="width: 25%;"><%= f_order.time_field :receipt_time %>
               </td>
             </tr>
 
@@ -28,7 +28,7 @@
       </table>
     </div>
   </div>
-  <% end %>
+
     <div class="row">
       <div class="col-2 my-4 ml-auto">
         <%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete, data: { confirm: '本当に空しますか?' }, class:"btn btn-danger" %>
@@ -40,7 +40,6 @@
       <th>単価(税込)</th>
       <th>数量</th>
       <th>小計</th>
-      <th style="width: 10%;">数量を</th>
       <th style="width: 10%;">商品を</th>
     </thead>
     <tbody>
@@ -49,14 +48,32 @@
         <tr>
           <td><%= image_tag cart_item.item.image, style: "width: 60px;" %>　<%= cart_item.item.name %></td>
           <td><%= cart_item.item.with_tax_price %>円</td>
-            <%= form_with model: @cart_item, url: public_cart_item_path(cart_item.id), method: :patch, local: true do |f| %>
-              <!--ユーザには表示されない情報`:item_id`パラメータ名を指定：`value: cart_item.item.id`は、隠しフィールドの初期値を指定-->
-              <td><%= f.hidden_field :item_id, value: cart_item.item.id %>
-                  <%= f.number_field :amount, value: cart_item.amount, class: 'form-control' %>
-              </td>
-              <td><%= cart_item.item.with_tax_price * cart_item.amount %>円</td>
-              <td><%= f.submit "変更する", class: "btn btn-success" %></td>
-            <% end %>
+          <!--ユーザには表示されない情報`:item_id`パラメータ名を指定：`value: cart_item.item.id`は、隠しフィールドの初期値を指定-->
+          <td>
+            <%= f_order.hidden_field :item_id, value: cart_item.item.id %>
+            <%= f_order.number_field :amount, value: cart_item.amount, class: 'form-control', data: { price: cart_item.item.with_tax_price } %>
+          </td>
+          <td>
+            <span class="price"><%= cart_item.item.with_tax_price * cart_item.amount %>円</span>
+          </td>
+
+          <script>
+
+            const numberFields = document.querySelectorAll("input[name='f_order[amount]']");
+            const priceElements = document.querySelectorAll(".price");
+
+            numberFields.forEach((numberField, index) => {
+              const priceElement = priceElements[index];
+              const pricePerItem = numberField.getAttribute("data-price");
+
+              numberField.addEventListener("change", function() {
+                const quantity = parseInt(this.value);
+                const price = parseInt(pricePerItem) * quantity;
+
+                priceElement.textContent = price.toLocaleString() + "円";
+              });
+            });
+          </script>
 
           <td><%= button_to "削除する", public_cart_item_path(cart_item), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-danger" %></td>
         </tr>
@@ -85,6 +102,7 @@
           </table>
         </div>
       <% end %>
+  <% end %>
     </div>
     <div class="row justify-content-center">
       <% if @cart_items.present? %>

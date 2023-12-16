@@ -54,13 +54,13 @@
           <li><%= link_to new_customer_session_path, class: 'nav-link text-light' do %>
             <i class="fa-solid fa-right-to-bracket"></i> ログイン<% end %>
           </li>
+          <li>
+            <%= link_to customers_guest_sign_in_path, method: :post, class: 'nav-link text-light' do %>
+            <i class="fa-solid fa-user-clock"></i> ゲストログイン<% end %>
+          </li>
         <% end %>
       </ul>
-      <div class="d-flex justify-content-end">
-        <form class="mr-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="検索" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
-        </form>
+          <%= render 'layouts/search', q: @q, url: public_items_path %>
       </div>
     </div>
   </div>

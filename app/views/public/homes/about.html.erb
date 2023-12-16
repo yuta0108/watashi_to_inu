@@ -1,2 +1,49 @@
-<h1>Public::Homes#about</h1>
-<p>Find me in app/views/public/homes/about.html.erb</p>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>スクロールアニメーション</title>
+  <style>
+    .animated {
+      opacity: 0;
+      /*0は完全に透明で非表示*/
+      transition: opacity 3s;
+      /*アニメーションが3秒かけて実行*/
+    }
+    .visible {
+      opacity: 1;
+      /*1は完全に不透明で表示*/
+    }
+  </style>
+</head>
+<body>
+  <div class="animated">スクロールアニメーションのテキスト</div>
+  <script>
+    const animatedElement = document.querySelector('.animated');
+
+    // アニメーションを実行する関数
+    // <!--runAnimation()`アニメーションを実行するためのもの-->
+    function runAnimation() {   
+      const rect = animatedElement.getBoundingClientRect();
+      // `animatedElement`の位置情報を取得,`getBoundingClientRect()`は、要素の位置やサイズに関する情報を取得
+      if (rect.top <= window.innerHeight) {
+        // rect.top`（要素の上端の位置）が`window.innerHeight`（ウィンドウの高さ）以下かどうかを判定,`rect.top <= window.innerHeight`は、要素が画面内に入ったかどうかを判定する
+        animatedElement.classList.add('visible');
+        // "visible"を追加します。これにより、CSSで指定されたスタイルが適用
+      } else {
+        animatedElement.classList.remove('visible');
+      }
+    }
+
+    // ページの読み込み時に実行
+    document.addEventListener('DOMContentLoaded', function() {
+      runAnimation();
+    });
+
+    // スクロール時にアニメーションを監視
+    window.addEventListener('scroll', function() {
+      runAnimation();
+    });
+  </script>
+</body>
+</html>

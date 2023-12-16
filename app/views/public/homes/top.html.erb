@@ -2,19 +2,23 @@
   <div class="row">
     <div class="col-md-8 mx-auto">
       <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
-                                    <!--スライドやアニメーションの演出  <!--自動的にカルーセルのスライドが開始,2秒で切り替わる-->-->
+                                    <!--スライドやアニメーションの演出  <!--自動的にカルーセルのスライドが開始,2秒で切り替わる-->
         <div class="carousel-inner"><!-- スライドが配置されるコンテナ -->
-          <div class="carousel-item active"><!-- 最初のスライドには `active` -->
-            <%= image_tag("chiwa.jpg", class: "d-block mx-auto w-100", alt: "Centered Image") %>
-          </div>
-          <div class="carousel-item">
-            <%= image_tag("hot.jpg", class: "d-block mx-auto w-100") %>
-          </div>
-          <div class="carousel-item">
-            <%= image_tag("ore.jpg", class: "d-block mx-auto w-100") %>
-          </div>
-          <div class="carousel-item">
-            <%= image_tag("tennai-1.jpg", class: "d-block mx-auto w-100") %>
+          <div id="carouselExample" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%= image_tag("chiwa.jpg", width: "800", height: "500", class: "d-block mx-auto", alt: "Centered Image") %>
+              </div>
+              <div class="carousel-item">
+                <%= image_tag("hot.jpg", width: "800", height: "500", class: "d-block mx-auto") %>
+              </div>
+              <div class="carousel-item">
+                <%= image_tag("ore.jpg", width: "800", height: "500", class: "d-block mx-auto") %>
+              </div>
+              <div class="carousel-item">
+                <%= image_tag("tennai-1.jpg", width: "800", height: "500", class: "d-block mx-auto") %>
+              </div>
+            </div>
           </div>
         </div>
         <!-- スライドを制御 -->
@@ -29,4 +33,5 @@
       </div>
     </div>
   </div>
+
 </div>
