@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
+
+.col h2{
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+#search-form {
+  position: absolute;
+  top: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0); /* 背景色を完全に透明にするには、最後の値を0に設定します */
+  padding: 10px;
+  text-align: center;
+  z-index: 1;
+}
+
+
+.overlay h1 {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  color: #000;
+}

@@ -1,67 +1,84 @@
-<nav class="navbar navbar-expand-lg py-2 navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg py-2 navbar-light bg-transparent" id="myNavbar">
   <div class="container">
+    <div class="row">
+      <div class="col mr-5">
+        <%= link_to root_path, class: 'nav-link text-dark' do %>
+        <h5>わたし<i class="fa-solid fa-paw"></i>いぬ<% end %></h5>
+      </div>
+    </div>
+
+    <script>
+      window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('myNavbar');
+        if (window.scrollY > 0) {
+          navbar.classList.add('fixed-top');
+        } else {
+          navbar.classList.remove('fixed-top');
+        }
+      });
+    </script>
+
     <% if customer_signed_in? %>
-      <div class="text-light">ようこそ<%= current_customer.first_name + current_customer.last_name %>さん！</div>
+      <div class="text-dark">ようこそ <%= current_customer.first_name + current_customer.last_name %>さん！</div>
     <% end %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
           <!-- 顧客ログイン時 -->
-          <li><%= link_to public_customers_my_page_path, class: 'nav-link text-light' do %>
+          <li><%= link_to public_customers_my_page_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-circle-user"></i> マイページ<% end %>
           </li>
-          <li><%= link_to public_items_path, class: 'nav-link text-light' do %>
+          <li><%= link_to public_items_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-mug-hot"></i> 商品一覧<% end %>
           </li>
-          <li><%= link_to public_cart_items_path, class: 'nav-link text-light' do %>
+          <li><%= link_to public_cart_items_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-cart-shopping"></i> カート<% end %>
           </li>
-          <li><%= link_to destroy_customer_session_path, method: :delete, url: customer_session_path, class: 'nav-link text-light' do %>
+          <li><%= link_to destroy_customer_session_path, method: :delete, url: customer_session_path, class: 'nav-link text-dark' do %>
             <i class="fas fa-sign-out-alt"></i> ログアウト<% end %>
           </li>
         <% elsif admin_signed_in? %>
           <!-- 管理者ログイン時 -->
-          <li><%= link_to admin_path, class: 'nav-link text-light' do %>
+          <li><%= link_to admin_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-users"></i> 会員一覧<% end %>
           </li>
-          <li><%= link_to admin_items_path, class: 'nav-link text-light' do %>
+          <li><%= link_to admin_items_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-mug-hot"></i> 商品一覧<% end %>
           </li>
-          <li><%= link_to admin_orders_path, class: 'nav-link text-light' do %>
+          <li><%= link_to admin_orders_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-file-lines"></i> 注文履歴一覧<% end %>
           </li>
-          <li><%= link_to admin_genres_path, class: 'nav-link text-light' do %>
+          <li><%= link_to admin_genres_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-cake-candles"></i> ジャンル一覧<% end %>
           </li>
-          <li><%= link_to destroy_admin_session_path, method: :delete, url: admin_session_path, class: 'nav-link text-light' do %>
+          <li><%= link_to destroy_admin_session_path, method: :delete, url: admin_session_path, class: 'nav-link text-dark' do %>
             <i class="fas fa-sign-out-alt"></i> ログアウト<% end %>
           </li>
         <% else %>
           <!-- ログアウト時 -->
-          <li><%= link_to public_items_path, class: 'nav-link text-light' do %>
+          <li><%= link_to public_items_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-mug-hot"></i> 商品一覧<% end %>
           </li>
-          <li><%= link_to new_customer_registration_path, class: 'nav-link text-light' do %>
+          <li><%= link_to new_customer_registration_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-user-plus"></i> 新規登録<% end %>
           </li>
-          <li><%= link_to public_about_path, class: 'nav-link text-light' do %>
+          <li><%= link_to public_about_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-link"></i> アバウト<% end %>
           </li>
-          <li><%= link_to new_customer_session_path, class: 'nav-link text-light' do %>
+          <li><%= link_to new_customer_session_path, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-right-to-bracket"></i> ログイン<% end %>
           </li>
           <li>
-            <%= link_to customers_guest_sign_in_path, method: :post, class: 'nav-link text-light' do %>
+            <%= link_to customers_guest_sign_in_path, method: :post, class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-user-clock"></i> ゲストログイン<% end %>
           </li>
         <% end %>
       </ul>
-          <%= render 'layouts/search', q: @q, url: public_items_path %>
-      </div>
+        <%= render 'layouts/search', q: @q, url: public_items_path %>
     </div>
   </div>
 </nav>

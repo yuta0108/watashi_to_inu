@@ -1,16 +1,31 @@
 <% if controller_name != 'sessions' %>
-<!--「controller_name」が「sessions」ではない場合に実行-->
-<div class="search_form">
-  <%= search_form_for @q, url: public_search_path do |f| %>
-    <div class="col-md-8 ml-auto">
-      <%= f.search_field :name_cont, class: "form-control" %>
-                          <!--_cont contains value 部分一致-->
-    </div>
-    <div class="col-md-8 ml-auto">
-    <%= button_tag type: "submit", class: 'btn btn-outline-success' do %>
+  <div class="dropdown">
+    <%= button_tag type: 'button', class: 'btn btn-primary dropdown-toggle', id: 'search-button', data_toggle: 'dropdown', aria_expanded: 'false',
+                   onclick: 'toggleSearchForm()' do %>
       <i class="fa-solid fa-magnifying-glass"></i>
     <% end %>
+
+    <div class="dropdown-menu" id="search-form" aria_labelledby="search-button">
+      <%= search_form_for @q, url: public_search_path, class: "dropdown-item" do |f| %>
+        <%= f.search_field :name_cont, class: "form-control" %>
+        <%= button_tag type: 'submit', class: 'btn btn-outline-success' do %>
+          検索
+        <% end %>
+      <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
+
+  <script>
+    function toggleSearchForm() {
+      const searchForm = document.getElementById('search-form');
+      const button = document.getElementById('search-button');
+      if (searchForm.classList.contains('show')) {
+        searchForm.classList.remove('show');
+        button.setAttribute('aria-expanded', 'false');
+      } else {
+        searchForm.classList.add('show');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    }
+  </script>
 <% end %>

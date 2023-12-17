@@ -19,6 +19,8 @@ class ApplicationController < ActionController::Base
         root_path
     end
   end
+  
+  
 
   def after_sign_out_path_for(admin) #`admin` は不要なので無視
     new_admin_session_path
