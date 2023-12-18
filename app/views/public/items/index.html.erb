@@ -1,5 +1,6 @@
-<div class="text-center my-5">
-  <h3>商品一覧</h3>
+<div class="text-center my-5" style="position: relative;">
+  <%= image_tag 'ribbon_pi.png', size: '450x60' %>
+  <h3 style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);">商品一覧</h3>
 </div>
 <div class="container">
   <div class="row">
@@ -12,7 +13,7 @@
           <div class="col-3 mb-4">
             <%= link_to public_item_path(item.id) do%>
               <div class="card border-0 shadow-sm" style="width: 10rem;">
-                <%= image_tag item.image, class: "card-img-top rounded", style: "object-fit: cover; width: 100%; height: 7rem;" %>
+                <%= image_tag item.image, class: "card-img-top rounded hover-zoom", style: "object-fit: cover; width: 100%; height: 7rem;" %>
                 <!--rounded:画像に丸みを帯びたスタイル--> <!--`object-fit: cover;`のスタイルは、画像のアスペクト比を維持しながら要素のサイズに合わせて画像をリサイズする-->
                 <div class="card-body">
             <% end %>

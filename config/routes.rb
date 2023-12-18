@@ -25,7 +25,6 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :destroy, :update, :create]
 
     resources :customers, only: [:show, :edit, :update]
-      get 'customers/my_page' => 'customers#show'
     resources :items, only: [:new, :show, :index, :edit]
     get 'homes/about' => 'homes#about', as: '/about'
   end

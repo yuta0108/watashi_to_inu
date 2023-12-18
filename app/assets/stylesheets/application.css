@@ -42,3 +42,17 @@
   font-family: 'Zen Kaku Gothic New', sans-serif;
   color: #000;
 }
+
+.container img {
+  opacity: 0.8;
+}
+
+ /* アニメーションの時間を設定 */
+.hover-zoom {
+  transition: transform 0.5s;
+}
+/* ホバー時に拡大する度合いを設定 */
+.hover-zoom:hover {
+  transform: scale(1.1);
+}
+

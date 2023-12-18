@@ -29,7 +29,7 @@
       <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
           <!-- 顧客ログイン時 -->
-          <li><%= link_to public_customers_my_page_path, class: 'nav-link text-dark' do %>
+          <li><%= link_to public_customer_path(current_customer), class: 'nav-link text-dark' do %>
             <i class="fa-solid fa-circle-user"></i> マイページ<% end %>
           </li>
           <li><%= link_to public_items_path, class: 'nav-link text-dark' do %>
