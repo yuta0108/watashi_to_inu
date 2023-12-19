@@ -18,6 +18,11 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  scope :latest, -> {order(created_at: :desc)} #新しい順
+  scope :old, -> {order(created_at: :asc)} #古い順
+  # scope :cheapest, -> { order(price: :asc) } # 安い順
+  # scope :expensive, -> { order(price: :desc) } # 高い順
+
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "genre_id", "id", "is_sales", "name", "product_description", "tax_included_price", "updated_at"]
   end

@@ -56,3 +56,45 @@
   transform: scale(1.1);
 }
 
+body {
+  background-color: #E3DCD2;
+  font-family: 'Zen Maru Gothic', serif;
+}
+
+/* ページネーション全体のスタイル */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* ページネーションアイテムのスタイル */
+.pagination li {
+  list-style-type: none;
+  margin: 0 5px;
+  display: inline;
+}
+
+/* アクティブなページのスタイル */
+.pagination .active {
+  background-color: #8d6e63; 
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* ページリンクのスタイル */
+.pagination a {
+  color: #8d6e63; 
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #8d6e63;
+  border-radius: 5px;
+}
+
+/* ページリンクのホバースタイル */
+.pagination a:hover {
+  color: #fff;
+  background-color: #8d6e63;
+  border-color: #8d6e63;
+}

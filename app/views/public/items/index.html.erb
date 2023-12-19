@@ -1,8 +1,21 @@
 <div class="text-center my-5" style="position: relative;">
-  <%= image_tag 'ribbon_pi.png', size: '450x60' %>
+  <%= image_tag 'sample-ribbon3.png', size: '450x60' %>
   <h3 style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);">商品一覧</h3>
 </div>
 <div class="container">
+  <div class="row my-4 ml-auto">
+    <div class="col">
+      <div class="sort">
+        <%= link_to '新しい順', public_items_path(latest: "true") %>
+        |
+        <%= link_to '古い順', public_items_path(old: "true") %>
+        |
+        <%#= link_to '安い順', public_items_path(cheapest: "true") %>
+        |
+        <%#= link_to '高い順', public_items_path(expensive: "true") %>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-2">
       <%= render "layouts/genre", genres: @genres %>
@@ -24,6 +37,12 @@
           </div>
         <% end %>
       </div>
+
+        <div class="col-md-4 my-5 mx-auto">
+          <%= paginate @items %>
+        </div>
+
     </div>
   </div>
 </div>
+

@@ -20,19 +20,22 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @cart_items = current_customer.cart_items.all
-    @order.save
+    if @order.save
 
-    # @cart_items.each do |cart_item|
-    #   @order_detail = OrderDetail.new
-    #   @order_detail.item_id = cart_item.item.id
-    #   @order_detail.order_id = @order.id
-    #   @order_detail.amount = cart_item.amount
-    #   @order_detail.tax_included_price = cart_item.item.tax_included_price
-    #   @order_detail.production_status = 0
-    #   @order_detail.save
-    
-    current_customer.cart_items.destroy_all
-    redirect_to public_orders_thanks_path
+      @cart_items.each do |cart_item|
+        @order_detail = OrderDetail.new
+        @order_detail.item_id = cart_item.item.id
+        @order_detail.order_id = @order.id
+        @order_detail.amount = cart_item.amount
+        @order_detail.tax_included_price = cart_item.item.tax_included_price
+        @order_detail.production_status = 0
+        @order_detail.save
+      end
+      current_customer.cart_items.destroy_all
+      redirect_to public_orders_thanks_path
+    else
+      render 'confirm'
+    end
 
   end
 
@@ -43,7 +46,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-
+    @order = Order.find(params[:id])
+    @order_details = OrderDetail.where(order_id: @order.id)
   end
 
   private
@@ -53,7 +57,7 @@ class Public::OrdersController < ApplicationController
   end
 
 
-  # def order_params
-  #     params.require(:order).permit(:customer_id, :receipt_date, :receipt_time, :total_product_quantity, :charge, :total_product_amount, :payment_method, :is_receipt)
-  # end
+  def order_params
+    params.require(:order).permit(:customer_id, :receipt_date, :receipt_time, :total_product_quantity, :charge, :total_product_amount, :payment_method, :is_receipt)
+  end
 end
