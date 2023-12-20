@@ -19,6 +19,7 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @items = Item.all
     @cart_items = current_customer.cart_items.all
     if @order.save
 
@@ -58,6 +59,6 @@ class Public::OrdersController < ApplicationController
 
 
   def order_params
-    params.require(:order).permit(:customer_id, :receipt_date, :receipt_time, :total_product_quantity, :charge, :total_product_amount, :payment_method, :is_receipt)
+    params.require(:order).permit(:customer_id, :receipt_date, :receipt_time, :charge, :payment_method, :is_receipt, cart_item: [:amount])
   end
 end

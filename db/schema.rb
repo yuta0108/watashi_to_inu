@@ -103,7 +103,6 @@ ActiveRecord::Schema.define(version: 2023_12_07_121859) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.integer "order_time", null: false
     t.integer "charge", null: false
     t.integer "payment_method", null: false
     t.integer "receipt_date", null: false

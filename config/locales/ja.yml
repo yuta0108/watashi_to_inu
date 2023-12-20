@@ -4,6 +4,9 @@ ja:
       payment_method:
         credit_card: "クレジットカード"
         pay_store: "店舗支払い"
+      is_receipt:
+        received: "受取済"
+        not_received: "未受け取り"
     order_detail:
       production_status:
         waiting: "製作待ち"

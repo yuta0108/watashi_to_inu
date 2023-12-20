@@ -49,7 +49,7 @@
     <% end %>
     </div>
   </div>
-  <div class="row mt-5 ml-5">
+  <div class="row mt-5 justify-content-center">
     <div class="col-5 text-center">
       <table class="table table-bordered">
         <thead>
@@ -66,33 +66,38 @@
     <% total_price += cart_item.item.with_tax_price * cart_item.amount %>
   <% end %>
 　<div class="row mt-3">
-　  <div class="col-6 ml-auto">
+　  <div class="col-5 ml-auto">
 　    商品数量合計：<%= @total_amount %>
 　  </div>
 　</div>
 　<div class="row">
-　  <div class="col-6 ml-auto">
+　  <div class="col-5 ml-auto">
 　    合計金額：<%= total_price %>円
 　  </div>
 　</div>
-　<div class="row ml-auto">
-　  <%= form_with model: Order.new, url: public_orders_confirm_path, method: :get do |f|  %>
-　  <div class="col">
+
+　<div class="row mt-5 justify-content-center">
+    <div class="col-2">
 　    <h4>支払い方法</h4>
-        <%= f.radio_button :pay_method, :credit_card, checked: true %>
-         <%= f.label :pay_method, Order.payment_methods_i18n[:credit_card], {value: :credit_card} %>
-        <br>
-        <%= f.radio_button :pay_method, :transfer %>
-        <%= f.label :pay_method, Order.payment_methods_i18n[:pay_store], {value: :pay_store} %>
-    <% end %>
-　  </div>
+　    <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
+        <%= f.hidden_field :customer_id, value: current_customer.id %>
+        <%= f.hidden_field :receipt_date, value: @order.receipt_date %>
+        <%= f.hidden_field :receipt_time, value: @order.receipt_time %>
+        <%= f.radio_button :payment_method, :credit_card, checked: true %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card], {value: :credit_card} %><br>
+        <%= f.radio_button :payment_method, :pay_store %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:pay_store], {value: :pay_store} %>
+        <%= f.hidden_field :charge, value: total_price  %>
+        <%= f.hidden_field :is_receipt, value: "not_received" %>
+    </div>
 　</div>
 　<div class="row mt-3 ml-4 justify-content-center">
 　  <div class="col-4">
 　    <%= link_to "カートに戻る", public_cart_items_path, class: "btn btn-danger" %>
 　  </div>
-　  <div class="col-4">
-　    <%= link_to "注文する", public_orders_thanks_path, class: "btn btn-primary" %>
+    <div class="col-4">
+        <%= f.submit "注文を確定する", class: "btn btn-primary" %>
+      <% end %>
 　  </div>
 　</div>
 </div>

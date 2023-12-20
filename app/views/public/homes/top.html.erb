@@ -1,45 +1,71 @@
-<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
-                                    <!--スライドやアニメーションの演出  <!--自動的にカルーセルのスライドが開始,2秒で切り替わる-->
-  <div class="carousel-inner"><!-- スライドが配置されるコンテナ -->
-    <div id="carouselExample" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <%= image_tag("sample-dog1.jpg", width: "1200", height: "700", class: "d-block mx-auto", alt: "Centered Image") %>
-        </div>
-        <div class="overlay">
-          <h1>わたしといぬ</h1>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag("sample-food1.jpg", width: "1200", height: "700", class: "d-block mx-auto") %>
-        </div>
-        <div class="overlay">
-          <h1>わたしといぬ</h1>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag("sample-coffee2.jpg", width: "1200", height: "700", class: "d-block mx-auto") %>
-        </div>
-        <div class="overlay">
-          <h1>わたしといぬ</h1>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag("sample-building3.jpg", width: "1200", height: "700", class: "d-block mx-auto") %>
-        </div>
-        <div class="overlay">
-          <h1>わたしといぬ</h1>
-        </div>
+<div class="container">
+  <div class="row text-center my-5">
+    <div class="col">
+      <h1>わたしといぬ</h1>
+    </div>
+  </div>
+</div>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .my-item {
+      opacity: 0; /*不透明度を指定*/
+      transition: opacity 1s; /*1秒の時間をかけてアニメーションさせる効果*/
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="row">
+      <div class="my-item">
+        <%= image_tag("sample-dog1.jpg", width: "357", height: "260") %>
+      </div>
+      <div class="my-item">
+        <%= image_tag("sample-food1.jpg", width: "357", height: "260") %>
+      </div>
+      <div class="my-item">
+        <%= image_tag("sample-coffee2.jpg", width: "356", height: "260") %>
+      </div>
+      <div class="my-item">
+        <%= image_tag("sample-cake1.png", width: "356", height: "260") %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="my-item">
+        <%= image_tag("sample-building1.jpg", width: "357", height: "260") %>
+      </div>
+      <div class="my-item">
+        <%= image_tag("sample-building3.jpg", width: "357", height: "260") %>
+      </div>
+      <div class="my-item">
+        <%= image_tag("sample-building4.jpg", width: "356", height: "260") %>
+      </div>
+      <div class="my-item">
+        <%= image_tag("sample-building2.jpg", width: "356", height: "260") %>
       </div>
     </div>
   </div>
-  <!-- スライドを制御 -->
-  <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var items = document.querySelectorAll(".my-item");
+      var delay = 1000; // アイテムの表示間隔を設定します（1秒ごと）
+
+      Array.prototype.forEach.call(items, function(item, index) {　//`items`の各要素に対して繰り返し処理を行う
+      // `setTimeout`は、指定した時間（`index * delay`）後に関数を実行するためのタイマー機能
+        setTimeout(function() {
+          item.style.opacity = "1"; // 一定の遅延後にアイテムを完全に表示します
+        }, index * delay);
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
 <div class="container">
   <div class="row mt-4 justify-content-center">
     <div class="col">

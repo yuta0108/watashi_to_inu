@@ -40,28 +40,30 @@
     const sentences = document.querySelectorAll('#sentence1, #sentence2, #sentence3, #sentence4');
 
     let index = 0;
-    function showNextSentence() {
+    function showNextSentence() {  //`showNextSentence`関数は、次の文を表示するための処理を行う\
+    // `sentences`の長さ以下である場合、`sentences[index]`要素の`opacity`プロパティを1に設定し、`index`をインクリメントします。
       if (index < sentences.length) {
         sentences[index].style.opacity = 1;
         index++;
-        setTimeout(showNextSentence, 3000);
+        setTimeout(showNextSentence, 3000); //3秒ごとに次の文が表示される\
       }
     }
-
+// `runAnimation`という関数は、アニメーションの実行を制御します。
     function runAnimation() {
+      // `animatedElement`の位置座標を取得
       const rect = animatedElement.getBoundingClientRect();
-      if (rect.top <= window.innerHeight) {
-        showNextSentence();
-        animatedElement.classList.add('visible');
-      } else {
-        animatedElement.classList.remove('visible');
+      if (rect.top <= window.innerHeight) {    // もし要素が画面内にある場合
+        showNextSentence();  // `showNextSentence`関数を呼び出す
+        animatedElement.classList.add('visible');  //`animatedElement`に`visible`クラスを追加
+      } else {  //要素が画面外にある場合
+        animatedElement.classList.remove('visible');  //`visible`クラスを削除
       }
     }
-
+// HTMLドキュメントが読み込まれた後、アニメーションが実行 "DOMContentLoaded"を監視!!
     document.addEventListener('DOMContentLoaded', function() {
       runAnimation();
     });
-
+// ウィンドウがスクロールされるたびにアニメーションが実行 "scroll"を監視!!
     window.addEventListener('scroll', function() {
       runAnimation();
     });

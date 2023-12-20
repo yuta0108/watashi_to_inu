@@ -1,26 +1,22 @@
 class Public::ItemsController < ApplicationController
+
   def index
-
-    @items = Item.all
-    @items = Item.page(params[:page])
-    if params[:latest]
-      @items = Item.latest.page(params[:page]).per(8)
-    elsif params[:old].present?
-      @items = Item.old.page(params[:page]).per(8)
-    # elsif params[:cheapest].present?
-    #   @cheap_items = Item.cheapest.page(params[:page]).per(8)
-    # elsif params[:expensive].present?
-    #   @expensive_items = Item.expensive.page(params[:page]).per(8)
-    else
-      @items = Item.all.page(params[:page]).per(8)
-    end
-
     @genres = Genre.all
+    @items = Item.all
+    # ソート機能
+    if params[:latest]
+      @items = @items.latest
+    elsif params[:old].present?
+      @items = @items.old
+    end
+    # ジャンル機能
     if params[:genre_id].present?
-      #presentメソッドでparams[:ge_id]に値が含まれているか確認 => trueの場合下記を実行
       @genre = Genre.find(params[:genre_id])
       @items = @genre.items
     end
+
+    @items = @items.page(params[:page]).per(8)
+
   end
 
   def show

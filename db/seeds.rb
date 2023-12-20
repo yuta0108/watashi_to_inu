@@ -118,7 +118,7 @@ end
 
 if Item.count.zero?
 Item.create!(
- genre_id: 1,
+ genre_id: 4,
  name: "ホットドックセット",
  tax_included_price: 500,
  product_description: "当店自慢のホットドックポテトセットは、ジューシーなホットドッグと香ばしいポテトが絶妙なバランスで楽しめる至福の組み合わせです。手軽に美味しさを堪能できるセットで、忙しい日常にほっと一息つけることでしょう。",

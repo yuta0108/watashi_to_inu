@@ -6,13 +6,9 @@
   <div class="row my-4 ml-auto">
     <div class="col">
       <div class="sort">
-        <%= link_to '新しい順', public_items_path(latest: "true") %>
+        <%= link_to '新しい順', public_items_path(latest: "true"), class: 'btn btn-success' %>
         |
-        <%= link_to '古い順', public_items_path(old: "true") %>
-        |
-        <%#= link_to '安い順', public_items_path(cheapest: "true") %>
-        |
-        <%#= link_to '高い順', public_items_path(expensive: "true") %>
+        <%= link_to '古い順', public_items_path(old: "true"), class: 'btn btn-danger' %>
       </div>
     </div>
   </div>
@@ -38,10 +34,9 @@
         <% end %>
       </div>
 
-        <div class="col-md-4 my-5 mx-auto">
-          <%= paginate @items %>
-        </div>
-
+      <div class="col-md-4 my-5 mx-auto">
+        <%= paginate @items %>
+      </div>
     </div>
   </div>
 </div>
