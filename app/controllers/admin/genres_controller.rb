@@ -1,5 +1,5 @@
 class Admin::GenresController < ApplicationController
-
+  before_action :authenticate_admin!
   # ユーザーが管理者であるかどうかを確認
 
   def index

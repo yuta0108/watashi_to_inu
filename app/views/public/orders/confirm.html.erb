@@ -1,6 +1,7 @@
 <div class="text-center my-5">
   <span style="color: red;"><h5>＊まだ注文は確定していません。</h5></span>
 </div>
+<%= render "public/shared/error_messages", resource: @order %>
 <div class="text-center mb-5" style="position: relative;">
   <%= image_tag 'ribbon_be.png', size: '450x60' %>
   <h3 style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);">ご注文確認画面</h3>

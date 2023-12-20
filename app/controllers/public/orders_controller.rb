@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+
   def confirm
     @order = Order.new(confirm_params)
     # @item_ids = @order[:item_ids]
@@ -44,6 +46,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
+    @order_detail = OrderDetail.where(@order)
   end
 
   def show

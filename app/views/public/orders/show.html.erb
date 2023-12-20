@@ -2,3 +2,60 @@
   <%= image_tag 'sample-ribbon1.png', size: '450x60' %>
   <h3 style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);">注文履歴詳細</h3>
 </div>
+<div "container">
+  <div class='row bg-white py-4 mx-5 rounded-lg'>
+    <div class='col-6 offset-1'>
+      <h4>注文情報</h4>
+      <table class='table table-bordered border-dark'>
+        <tr><th class="table-secondary">注文日</th>
+           <td style="width: 78%;"><%= @order.receipt_date %> : <%= @order.receipt_time %></td>
+          </tr>
+          <tr><th class="table-secondary">氏名</th>
+            <td>
+              <%= @order.customer.first_name %><%= @order.customer.last_name %>
+            </td>
+          </tr>
+          <tr><th class="table-secondary">支払方法</th>
+            <td><%= t("enums.order.payment_method.#{@order.payment_method}") %></td>
+          </tr>
+          <tr><th class="table-secondary">ステータス</th>
+            <td><%= content_tag(:div, class: @order.is_receipt ? "text-danger" : "text-success") do %>
+                  <%= @order.is_receipt ? content_tag(:strong, "受け取り済み") : content_tag(:strong, "未受け取り") %>
+                <% end %>
+            </td>
+          </tr>
+        </th>
+      </table>
+    </div>
+  </div>
+
+  <div class='row bg-white mx-5 rounded-lg'>
+    <div class='col-7 offset-1'>
+      <h4>注文内容</h4>
+      <table class='table table-bordered border-dark'>
+        <tr class="table-secondary">
+          <th>商品名</th>
+          <th>単価(税抜)</th>
+          <th>数量</th>
+          <th>小計</th>
+        </tr>
+        <% total = 0 %>
+        <% @order_details.each do |order_detail| %>
+          <tr>
+            <td style="width: 55%;"><%= order_detail.item.name %></td>
+            <td style="width: 20%;"><%= order_detail.tax_included_price %>円</td>
+            <td><%= order_detail.amount %></td>
+            <td><%= order_detail.amount * order_detail.tax_included_price %>円</td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+     <div class='col-4 mt-auto'>
+      <h4>請求情報</h4>
+      <table class="table table-bordered border-dark">
+        <tr><th class="table-secondary">ご請求額</th>
+        <td style="width: 65%;"><%= @order.charge %>円</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
