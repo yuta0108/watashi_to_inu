@@ -19,6 +19,17 @@ class Public::CustomersController < ApplicationController
     end
   end
 
+  def confirm
+    @customer = current_customer
+  end
+
+  def unsubscribe
+    @customer = current_customer
+    @customer.update(is_active: false)
+    reset_session
+    redirect_to root_path
+  end
+
   private
 
   def customer_params

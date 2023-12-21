@@ -5,20 +5,20 @@
 
 <div class='container'>
   <div class='row'>
-    <div class="col-md-12 bg-white p-5 mx-auto rounded-lg">
+    <div class="col-md-12 p-5 mx-auto rounded-lg">
       <table class="table table-bordered">
         <thead>
-          <th style="width: 15%;">注文日</th>
-          <th>受け取り日時</th>
-          <th>注文商品</th>
-          <th>支払金額</th>
-          <th>受け取り状況</th>
-          <th style="width: 15%;">注文詳細</th>
+          <th style="width: 15%; background-color: #D6D8DB;">注文日</th>
+          <th class="table-secondary">受け取り日時</th>
+          <th class="table-secondary">注文商品</th>
+          <th class="table-secondary">支払金額</th>
+          <th class="table-secondary">受け取り状況</th>
+          <th style="width: 15%; background-color: #D6D8DB;">注文詳細</th>
         </thead>
         <tbody>
           <% if @orders.present? %>
             <% @orders.each do |order| %>
-              <tr>
+              <tr class="table-light">
                 <td><%= order.receipt_date %></td>
                 <td><%= order.receipt_time %></td>
                 <td>
@@ -29,8 +29,8 @@
                 <td>
                   <%= order.charge %>円
                 </td>
-                <td><%= content_tag(:div, class: order.is_receipt ? "text-danger" : "text-success") do %>
-                      <%= order.is_receipt ? content_tag(:strong, "受け取り済み") : content_tag(:strong, "未受け取り") %>
+                <td><%= content_tag(:div, class: order.is_receipt ? "text-success" : "text-danger") do %>
+                      <%= order.is_receipt ? content_tag(:strong, "未受け取り") : content_tag(:strong, "受け取り済み") %>
                     <% end %>
                 </td>
                 <td><%= link_to "表示する", public_order_path(order), class: "btn btn-primary" %></td>

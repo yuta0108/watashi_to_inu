@@ -3,6 +3,22 @@
 
 class Public::SessionsController < Devise::SessionsController
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :reject_inactive_customer, only: [:create]
+
+
+  def reject_inactive_customer
+    @customer = Customer.find_by(email: params[:customer][:email])  # `params[:customer][:password]`が正しいパスワードであるかどうかを確認
+    if @customer
+      # `is_actives`はCustomerクラスのクラスメソッドであり、`is_active`をキーとして、真偽値を値とするハッシュです。`!`演算子を使用、`@customer.is_active`が真の場合には`false`
+      if @customer.valid_password?(params[:customer][:password]) && !Customer.is_actives[@customer.is_active]
+         flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
+        redirect_to new_customer_session_path
+      else
+        flash[:notice] = "項目を入力してください"
+      end
+    end
+  end
+
 
   # GET /resource/sign_in
   # def new

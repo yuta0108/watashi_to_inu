@@ -12,15 +12,15 @@
         <% if @cart_items.present? %>
           <thead>
             <tr>
-              <th style="width: 25%; background-color: #dee2e6;">お受け取り日</th>
-              <td style="width: 25%;"><%= f_order.date_field :receipt_date %></td>
+              <th style="width: 25%; background-color: #d6d8db;">お受け取り日</th>
+              <td style="width: 25%; background-color: white;"><%= f_order.date_field :receipt_date %></td>
               <!--value="今日の日付-->
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th style="width: 25%; background-color: #dee2e6;">お受け取り可能時間</th>
-              <td style="width: 25%;"><%= f_order.time_field :receipt_time %>
+              <th style="width: 25%; background-color: #d6d8db;">お受け取り可能時間</th>
+              <td style="width: 25%; background-color: white;"><%= f_order.time_field :receipt_time %>
               </td>
             </tr>
 
@@ -37,16 +37,16 @@
     </div>
   <table class="table table-bordered">
     <thead>
-      <th style="width: 35%;">商品名</th>
-      <th>単価(税込)</th>
-      <th>数量</th>
-      <th>小計</th>
-      <th style="width: 10%;">商品を</th>
+      <th style="width: 35%; background-color: #d6d8db;">商品名</th>
+      <th class="table-secondary">単価(税込)</th>
+      <th class="table-secondary">数量</th>
+      <th class="table-secondary">小計</th>
+      <th style="width: 10%; background-color: #d6d8db;">商品を</th>
     </thead>
     <tbody>
     <% if @cart_items.present? %>
       <% @cart_items.each do |cart_item| %>
-        <tr>
+        <tr class="table-light">
           <td><%= image_tag cart_item.item.image, style: "width: 60px;" %>　<%= cart_item.item.name %></td>
           <td><%= cart_item.item.with_tax_price %>円</td>
           <!--ユーザには表示されない情報`:item_id`パラメータ名を指定：`value: cart_item.item.id`は、隠しフィールドの初期値を指定-->

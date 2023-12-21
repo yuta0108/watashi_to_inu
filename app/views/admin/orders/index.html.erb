@@ -7,27 +7,29 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>購入日時</th>
-            <th>氏名</th>
-            <th>注文個数</th>
-            <th>受け取りステータス</th>
+            <th class="table-secondary">注文日時</th>
+            <th class="table-secondary">氏名</th>
+            <th class="table-secondary">注文個数</th>
+            <th class="table-secondary">受け取りステータス</th>
           </tr>
         </thead>
         <tbody>
           <% @orders.each do |order| %>
-            <tr>
+            <tr class="table-light">
               <td><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M'), admin_order_path(order) %></td>
               <td>
-                <%= link_to admin_order_path(customer.id) do %>
-                  <%= order.first_name %> <%= order.last_name %>
-                <% end %>
+                <%= order.customer.first_name %> <%= order.customer.last_name %>
               </td>
               <td><%= order.order_details.sum(:amount) %></td>
-              <td><%= order.is_receipt_i18n %></td>
+              <td><%= order.is_receipt_i18n %>
+              </td>
             </tr>
           <% end %>
         </tbody>
       </table>
+    </div>
+    <div class="col-md-4 my-5 mx-auto">
+      <%= paginate @orders %>
     </div>
   </div>
 </div>

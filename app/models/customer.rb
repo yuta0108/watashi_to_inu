@@ -4,6 +4,7 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+
   GUEST_CUSTOMER_EMAIL = "guest@example.com"
 
   def self.guest
@@ -25,4 +26,6 @@ class Customer < ApplicationRecord
 
   has_many :cart_items
   has_many :orders
+
+  enum is_active: {active: true, non_active: false}
 end

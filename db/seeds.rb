@@ -181,3 +181,4 @@ Item.create!(
  image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/app/assets/images/sample-cake4.png"), filename:"sample-cake4.png")
 )
 end
+

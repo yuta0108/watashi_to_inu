@@ -37,6 +37,7 @@ class AddDeviseToCustomers < ActiveRecord::Migration[6.1]
       t.string :last_name_kana, null: false
       t.string :first_name_kana, null: false
       t.string :phone_number, null: false
+      t.boolean :is_active, null: false, default: true
 
       # Uncomment below if timestamps were not included in your original model.
       # t.timestamps null: false

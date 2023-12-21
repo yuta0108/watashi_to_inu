@@ -1,0 +1,52 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-6 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0"><%= @customer.first_name %> <%= @customer.last_name %> 様の会員情報詳細</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-10 mx-auto rounded-lg">
+
+      <table class='table table-bordered border-dark'>
+        <tr>
+          <th class="table-secondary">会員ID</th>
+          <td style="width: 60%; background-color: white;"><%= @customer.id%></td>
+        </tr>
+        <tr>
+          <th class="table-secondary">氏名</th>
+          <td class="table-light"><%= @customer.first_name %><%= @customer.last_name %></td>
+        </tr>
+        <tr>
+          <th class="table-secondary">カナ</th>
+          <td class="table-light"><%= @customer.first_name_kana %><%= @customer.last_name_kana %></td>
+        </tr>
+          <th class="table-secondary">電話番号</th>
+          <td class="table-light"><%= @customer.phone_number %></td>
+        </tr>
+        <tr>
+          <th class="table-secondary">メールアドレス</th>
+          <td class="table-light"><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <th class="table-secondary">会員ステータス　</th>
+          <td class="table-light"><%= I18n.t("enums.customer.is_active.#{@customer.is_active}") %></td>
+        </tr>
+      </table>
+
+      <div class="row justify-content-center">
+        <div class="col-3 ml-5">
+          <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success mt-3 mr-3" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "会員一覧を見る", admin_path, class: "btn btn-primary mt-3" %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

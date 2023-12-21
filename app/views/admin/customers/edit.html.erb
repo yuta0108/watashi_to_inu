@@ -1,0 +1,72 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-6 px-0 mx-auto">
+      <div class='title_border text-center pt-1 pb-1 mt-5 mb-4'>
+        <h3 class="mb-0"><%= @customer.first_name %> <%= @customer.last_name %> 様の会員情報編集</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='container p-5'>
+  <%= form_with model: @customer, url: admin_customer_path(id: @customer.id), method: :patch do |f| %>
+    <%= render "public/shared/error_messages", resource: @customer %>
+    <div class="row text-center">
+      <div class="col mb-4">
+        <h5>会員ID : <%= @customer.id %></h5>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-3 sm-6 mb-4">
+        <h5>姓</h5>
+        <%= f.text_field :first_name, class: "form-control", autofocus: true, autocomplete: "first_name" %>
+      </div>
+      <div class="col-md-3 sm-6 mb-4">
+        <h5>名</h5>
+        <%= f.text_field :last_name, class: "form-control", autofocus: true, autocomplete: "last_name" %>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-3 sm-6 mb-4">
+        <h5>姓カナ</h5>
+        <%= f.text_field :first_name_kana, class: "form-control", autofocus: true, autocomplete: "first_name_kana" %>
+      </div>
+      <div class="col-md-3 sm-6 mb-4">
+        <h5>名カナ</h5>
+        <%= f.text_field :last_name_kana, class: "form-control", autofocus: true, autocomplete: "last_name_kana" %>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 sm-8 mb-4">
+        <h5>メールアドレス</h5>
+        <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 sm-8 mb-4">
+        <h5>電話番号(ハイフンなし)</h5>
+        <%= f.text_field :phone_number, class: "form-control", autofocus: true, autocomplete: "phone_number" %>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 sm-8 mb-4 text-center">
+         <%= f.label :is_active_true, { value: :true } do %>
+        <!--:value`オプションに`:true`を指定-->
+          <%= f.radio_button :is_active, true %>
+          有効会員
+        <% end %>
+
+        <%= f.label :is_active_false, { value: :false } do %>
+        <!--:value`オプションに`:false`を指定-->
+          <%= f.radio_button :is_active, false %>
+          退会済み
+        <% end %>
+
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-5 sm-5 mb-4 text-center">
+        <%= f.submit "変更を保存", class: "btn btn-success mt-2" %>
+      </div>
+    </div>
+  <% end %>
+</div>

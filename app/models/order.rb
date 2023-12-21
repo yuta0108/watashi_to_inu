@@ -9,5 +9,5 @@ class Order < ApplicationRecord
   has_one_attached :image
 
   enum payment_method: { credit_card: 0, pay_store: 1 }
-  enum is_receipt: {not_received: 0, received: 1 }
+  enum is_receipt: {not_received: true, received: false }
 end

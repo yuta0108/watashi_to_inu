@@ -9,13 +9,16 @@ Rails.application.routes.draw do
   namespace :admin do
     get "search" => "searches#search"
     resources :orders, only: [:index, :update, :show]
-    resources :customers, only: [:index, :edit]
+    resources :customers, only: [:index, :edit, :show, :update]
     resources :genres, only: [:index, :create,  :update, :edit]
     resources :items, only: [:new, :show, :index, :edit, :create, :update]
     get '/' => 'customers#index'
+    resources :order_details, only: [:update]
   end
 
   namespace :public do
+    get 'customers/confirm', to: 'customers#confirm'
+    patch 'customers/unsubscribe', to: 'customers#unsubscribe', as: 'customers/unsubscribe'
     get "search" => "searches#search"
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
       get 'orders/thanks' => 'orders#thanks'
