@@ -14,6 +14,7 @@
  *= require_self
  */
 
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(100%);
@@ -36,11 +37,6 @@
 }
 
 
-.overlay h1 {
-  font-family: 'Zen Kaku Gothic New', sans-serif;
-  color: #000;
-}
-
 .container img {
   opacity: 0.8;
 }
@@ -55,8 +51,8 @@
 }
 
 body {
-  background-color: #E3DCD2;
-  font-family: 'Zen Maru Gothic', serif;
+  background-color: #ead3ac;
+  font-family: 'Yusei Magic', sans-serif;
 }
 
 /* ページネーション全体のスタイル */
@@ -114,8 +110,7 @@ tr.row-hover:nth-child(even):hover {
   background-color: lightgreen; /* マウスホバー時に偶数行の背景色（例：ライトグリーン） */
 }
 .thead {
-  background-color: #f5e6cd; /* クリーム色やベージュのような温かみのある色 */
-  color: #553d26; /* ダークブラウンやコーヒー豆のような落ち着いた色 */
+  background-color: #a57f5e;
 }
 
 /*フッター*/
@@ -128,3 +123,4 @@ tr.row-hover:nth-child(even):hover {
 .fa-square-instagram{
   font-size: 30px;
 }
+

@@ -1,17 +1,9 @@
-<div class="text-center my-5">
-  <span style="color: red;"><h5>＊まだ注文は確定していません。</h5></span>
-</div>
-<%= render "public/shared/error_messages", resource: @order %>
-<div class="text-center mb-5" style="position: relative;">
-  <%= image_tag 'ribbon_be.png', size: '450x60' %>
-  <h3 style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);">ご注文確認画面</h3>
-</div>
 <div class="container">
   <div class="row my-3 justify-content-center">
     <div class="col-4 text-center">
       <table class="table table-bordered">
         <thead>
-          <tr class="table-secondary">
+          <tr style="background-color: #a57f5e;">
             <th>お受け取り日時</th>
           </tr>
         </thead>
@@ -20,41 +12,42 @@
   </div>
   <div class="row mb-5 text-center">
     <div class="col">
-      <%= @order.receipt_date %><br><%= @order.receipt_time %>
+      <%= @order.receipt_date %><%= @order.receipt_time %>
     </div>
   </div>
   <div class="col-9 ml-auto">
     <% @items.each do |item| %>
-    <div class="row">
-      <div class="col-5">
-        <%= image_tag item.image, class: "w-100" %>
-      </div>
-      <div class="col-5 mb-5 mx-auto">
-        <h5><%= item.name %></h5>
-        <div class="row">
-          <div class="col-10 my-4">
-            税込：<%= (item.tax_included_price * 1.1).floor %>円
-          </div>
+      <div class="row mb-4">
+        <div class="col-4">
+          <%= image_tag item.image, class: "w-100" %>
         </div>
-        <div class="row">
-          <div class="col-10 mb-4">
-            数量：<%= item.amount %>
+        <div class="col-8">
+          <h5><%= item.name %></h5>
+          <div class="row">
+            <div class="col-12">
+              税込：<%= (item.tax_included_price * 1.1).floor %>円
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-10 mb-4">
-            小計：<%= item.with_tax_price * item.amount.to_i  %>円
+          <div class="row">
+            <div class="col-12">
+              数量：<%= item.amount %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              小計：<%= item.with_tax_price * item.amount.to_i %>円
+            </div>
           </div>
         </div>
       </div>
     <% end %>
-    </div>
+  </div>
   </div>
   <div class="row mt-5 justify-content-center">
-    <div class="col-5 text-center">
+    <div class="col-4 text-center">
       <table class="table table-bordered">
         <thead>
-          <tr class="table-secondary">
+          <tr style="background-color: #a57f5e;">
             <th>お会計</th>
           </tr>
         </thead>
@@ -78,8 +71,18 @@
 　</div>
 
 　<div class="row mt-5 justify-content-center">
-    <div class="col-2">
-　    <h4>支払い方法</h4>
+    <div class="col-4 text-center">
+      <table class="table table-bordered">
+        <thead>
+          <tr style="background-color: #a57f5e;">
+            <th>支払方法</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-3">
+　  <div class="col-5 ml-auto">
 　    <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
         <%= f.hidden_field :customer_id, value: current_customer.id %>
         <%= f.hidden_field :receipt_date, value: @order.receipt_date %>
@@ -91,12 +94,12 @@
         <%= f.hidden_field :charge, value: total_price  %>
         <%= f.hidden_field :is_receipt, value: "not_received" %>
     </div>
-　</div>
-　<div class="row mt-3 ml-4 justify-content-center">
-　  <div class="col-4">
+  </div>
+　<div class="row mt-3 ml-5 justify-content-center">
+　  <div class="col-2">
 　    <%= link_to "カートに戻る", public_cart_items_path, class: "btn btn-danger" %>
 　  </div>
-    <div class="col-4">
+    <div class="col-2">
         <%= f.submit "注文を確定する", class: "btn btn-primary" %>
       <% end %>
 　  </div>

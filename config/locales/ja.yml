@@ -16,3 +16,15 @@ ja:
       is_active:
         active: "有効"
         non_active: "退会"
+  activerecord:
+    errors:
+      models:
+        customer:
+          attributes:
+            email:
+              blank: "メールアドレスを入力してください"
+            password:
+              blank: "パスワードを入力してください"
+    errors:
+      messages:
+        not_saved: "保存できませんでした"

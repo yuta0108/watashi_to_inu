@@ -6,11 +6,12 @@ class Item < ApplicationRecord
       validates :product_description
       validates :tax_included_price
       validates :image
+      validates :genre
   end
 
   belongs_to :genre
 
-    
+
   has_many :order_details
   has_many :orders, through: :order_details
   has_many :cart_items

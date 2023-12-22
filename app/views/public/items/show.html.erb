@@ -3,7 +3,7 @@
     <div class="col-2">
       <%= render "layouts/genre", genres: @genres %>
     </div>
-    <div class="col-8">
+    <div class="col-10">
       <div class="row justify-content-center">
         <div class="col-5">
           <%= image_tag @item.image, class: "w-100" %>
@@ -19,21 +19,28 @@
             <div class="col-10 mb-4">
               <h5><%= (@item.tax_included_price * 1.1).floor %>円（税込）</h5>
             </div>
+            <div class="col-10 mb-4">
+              <%= content_tag(:div, class: @item.is_sales ? "text-success" : "text-danger") do %>
+              <!--指定したタグ名と属性を持つHTML要素を作成する-->
+                <%= @item.is_sales ? content_tag(:strong, "販売中") : content_tag(:strong, "販売停止中") %>
+              <% end %>
+            </div>
           </div>
-          <% if customer_signed_in? %>
-            <%= form_with model: @cart_item, url: public_cart_items_path,method: :post,local:true do |f| %>
-              <div class="row">
-                <% unless @customer.guest_customer? %>
-                <div class="col-6">
-                  <%= f.hidden_field :item_id, value: @item.id %>
-                  <%= f.select :amount, (1..30).to_a, { include_blank: '個数選択' }, class: 'form-control' %>
-                  <!--`(1..30).to_a`は、選択肢の範囲を指定-->
+          <% if @item.is_sales %>
+            <% if customer_signed_in? %>
+              <%= form_with model: @cart_item, url: public_cart_items_path, method: :post, local: true do |f| %>
+                <div class="row">
+                  <% unless @customer.guest_customer? %>
+                    <div class="col-6">
+                      <%= f.hidden_field :item_id, value: @item.id %>
+                      <%= f.select :amount, (1..30).to_a, { include_blank: '個数選択' }, { required: true, class: 'form-control' } %>
+                    </div>
+                    <div class="col-5">
+                      <%= f.submit "カートに追加", class: "btn btn-success" %>
+                    </div>
+                  <% end %>
                 </div>
-                <div class="col-5">
-                  <%= f.submit "カートに追加", class: "btn btn-success" %>
-                </div>
-                <% end %>
-              </div>
+              <% end %>
             <% end %>
           <% end %>
         </div>

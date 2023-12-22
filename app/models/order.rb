@@ -1,5 +1,11 @@
 class Order < ApplicationRecord
-  validates :payment_method, presence: true
+
+  with_options presence: true do
+    validates :payment_method
+    validates :receipt_date
+    validates :receipt_time
+  end
+
   belongs_to :customer
   has_many :order_details, dependent: :destroy
   has_many :items, through: :order_details

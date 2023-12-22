@@ -12,18 +12,16 @@
         <% if @cart_items.present? %>
           <thead>
             <tr>
-              <th style="width: 25%; background-color: #d6d8db;">お受け取り日</th>
+              <th style="width: 25%; background-color: #a57f5e;">お受け取り日</th>
               <td style="width: 25%; background-color: white;"><%= f_order.date_field :receipt_date %></td>
               <!--value="今日の日付-->
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th style="width: 25%; background-color: #d6d8db;">お受け取り可能時間</th>
-              <td style="width: 25%; background-color: white;"><%= f_order.time_field :receipt_time %>
-              </td>
+              <th style="width: 25%; background-color: #a57f5e;">お受け取り可能時間</th>
+              <td style="width: 25%; background-color: white;"><%= f_order.time_field :receipt_time %></td>
             </tr>
-
           </tbody>
         <% end %>
       </table>
@@ -37,11 +35,11 @@
     </div>
   <table class="table table-bordered">
     <thead>
-      <th style="width: 35%; background-color: #d6d8db;">商品名</th>
-      <th class="table-secondary">単価(税込)</th>
-      <th class="table-secondary">数量</th>
-      <th class="table-secondary">小計</th>
-      <th style="width: 10%; background-color: #d6d8db;">商品を</th>
+      <th style="width: 35%; background-color: #a57f5e;">商品名</th>
+      <th style="background-color: #a57f5e;">単価(税込)</th>
+      <th style="background-color: #a57f5e;">数量</th>
+      <th style="background-color: #a57f5e;">小計</th>
+      <th style="width: 10%; background-color: #a57f5e;">商品を</th>
     </thead>
     <tbody>
     <% if @cart_items.present? %>
@@ -110,8 +108,8 @@
         <div class="col-3 ml-auto mt-4">
           <table class="table table-bordered">
             <tr>
-              <td style="width: 40%;">合計金額</td>
-              <td><%= total_price %>円</td>
+              <td style="width: 40%; background-color: #a57f5e;">合計金額</td>
+              <td class="table-light"><%= total_price %>円</td>
             </tr>
           </table>
         </div>

@@ -7,21 +7,22 @@
     <div class='col-6 offset-1'>
       <h4>注文情報</h4>
       <table class='table table-bordered border-dark'>
-        <tr><th class="table-secondary">注文日</th>
+        <tr><th style="background-color: #a57f5e;">注文日</th>
            <td style="width: 78%; background-color: white;"><%= @order.receipt_date %> : <%= @order.receipt_time %></td>
           </tr>
-          <tr><th class="table-secondary">氏名</th>
+          <tr><th style="background-color: #a57f5e;">氏名</th>
             <td class="table-light">
               <%= @order.customer.first_name %><%= @order.customer.last_name %>
             </td>
           </tr>
-          <tr><th class="table-secondary">支払方法</th>
+          <tr><th style="background-color: #a57f5e;">支払方法</th>
             <td class="table-light"><%= t("enums.order.payment_method.#{@order.payment_method}") %></td>
           </tr>
-          <tr><th class="table-secondary">ステータス</th>
-            <td class="table-light"><%= content_tag(:div, class: @order.is_receipt ? "text-success" : "text-danger") do %>
-                  <%= @order.is_receipt ? content_tag(:strong, "未受け取り") : content_tag(:strong, "受け取り済み") %>
-                <% end %>
+          <tr><th style="background-color: #a57f5e;">ステータス</th>
+            <td class="table-light">
+              <%= content_tag(:div, class: @order.is_receipt ? "text-success" : "text-danger") do %>
+                <%= @order.is_receipt ? content_tag(:strong, "未受け取り") : content_tag(:strong, "受け取り済み") %>
+              <% end %>
             </td>
           </tr>
         </th>
@@ -33,7 +34,7 @@
     <div class='col-7 offset-1'>
       <h4>注文内容</h4>
       <table class='table table-bordered border-dark'>
-        <tr class="table-secondary">
+        <tr style="background-color: #a57f5e;">
           <th>商品名</th>
           <th>単価(税抜)</th>
           <th>数量</th>
@@ -53,7 +54,7 @@
      <div class='col-4 mt-auto'>
       <h4>請求情報</h4>
       <table class="table table-bordered border-dark">
-        <tr><th class="table-secondary">ご請求額</th>
+        <tr><th style="background-color: #a57f5e;">ご請求額</th>
         <td style="width: 65%; background-color: white;"><%= @order.charge %>円</td></tr>
       </table>
     </div>

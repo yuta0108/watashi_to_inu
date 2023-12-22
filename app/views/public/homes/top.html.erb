@@ -49,16 +49,13 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-      var items = document.querySelectorAll(".my-item");
-      var delay = 1000; // アイテムの表示間隔を設定します（1秒ごと）
+    var items = document.querySelectorAll(".my-item");
+    var delay = 1000; // アイテムの表示間隔を設定します（1秒ごと）
 
-      Array.prototype.forEach.call(items, function(item, index) {　//`items`の各要素に対して繰り返し処理を行う
-      // `setTimeout`は、指定した時間（`index * delay`）後に関数を実行するためのタイマー機能
-        setTimeout(function() {
-          item.style.opacity = "1"; // 一定の遅延後にアイテムを完全に表示します
-        }, index * delay);
-      });
+    Array.prototype.forEach.call(items, function(item, index) {
+      setTimeout(function() {
+        item.style.opacity = "1"; // 一定の遅延後にアイテムを完全に表示します
+      }, index * delay);
     });
   </script>
 </body>
