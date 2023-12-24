@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(version: 2023_12_07_121859) do
     t.integer "customer_id", null: false
     t.integer "charge", null: false
     t.integer "payment_method", null: false
-    t.integer "receipt_date", null: false
-    t.integer "receipt_time", null: false
+    t.string "receipt_date", null: false
+    t.string "receipt_time", null: false
     t.boolean "is_receipt", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

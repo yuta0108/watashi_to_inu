@@ -9,7 +9,6 @@ class Public::CartItemsController < ApplicationController
     @order = Order.new
     @total = @cart_items.sum { |cart_item| cart_item.amount * cart_item.item.tax_included_price }
     # `sum`メソッドは、各要素に対してブロック内の処理を行い、その結果を合計する,`@cart_items`の各要素を1つずつ取り出す
-
   end
 
   def create
@@ -31,13 +30,13 @@ class Public::CartItemsController < ApplicationController
   def destroy_all
     cart_items = current_customer.cart_items
     cart_items.destroy_all
-    redirect_to public_cart_items_path
+    # redirect_to public_cart_items_path
   end
 
   def destroy
     delete_cart_item = CartItem.find(params[:id])
     delete_cart_item.destroy
-    redirect_to public_cart_items_path
+    # redirect_to public_cart_items_path
   end
 
   def update

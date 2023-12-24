@@ -8,7 +8,7 @@
       <h4>注文情報</h4>
       <table class='table table-bordered border-dark'>
         <tr><th style="background-color: #a57f5e;">注文日</th>
-           <td style="width: 78%; background-color: white;"><%= @order.receipt_date %> : <%= @order.receipt_time %></td>
+           <td style="width: 78%; background-color: white;"><%= @order.receipt_date %> / <%= @order.receipt_time %></td>
           </tr>
           <tr><th style="background-color: #a57f5e;">氏名</th>
             <td class="table-light">
@@ -20,9 +20,7 @@
           </tr>
           <tr><th style="background-color: #a57f5e;">ステータス</th>
             <td class="table-light">
-              <%= content_tag(:div, class: @order.is_receipt ? "text-success" : "text-danger") do %>
-                <%= @order.is_receipt ? content_tag(:strong, "未受け取り") : content_tag(:strong, "受け取り済み") %>
-              <% end %>
+              <%= @order.is_receipt_i18n %>
             </td>
           </tr>
         </th>

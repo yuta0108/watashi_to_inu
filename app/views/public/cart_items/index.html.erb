@@ -28,11 +28,10 @@
     </div>
   </div>
 
-    <div class="row">
-      <div class="col-2 my-4 ml-auto">
-        <%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete, data: { confirm: '本当に空しますか?' }, class:"btn btn-danger" %>
-      </div>
-    </div>
+  <td id="destroy_all_buttons_<%= destroy_all.id %>" >
+    <%= render "layouts/destroy_all", cart_items: cart_items %>
+  </td>
+
   <table class="table table-bordered">
     <thead>
       <th style="width: 35%; background-color: #a57f5e;">商品名</th>
@@ -42,57 +41,9 @@
       <th style="width: 10%; background-color: #a57f5e;">商品を</th>
     </thead>
     <tbody>
-    <% if @cart_items.present? %>
-      <% @cart_items.each do |cart_item| %>
-        <tr class="table-light">
-          <td><%= image_tag cart_item.item.image, style: "width: 60px;" %>　<%= cart_item.item.name %></td>
-          <td><%= cart_item.item.with_tax_price %>円</td>
-          <!--ユーザには表示されない情報`:item_id`パラメータ名を指定：`value: cart_item.item.id`は、隠しフィールドの初期値を指定-->
-          <td>
-            <%= f_order.fields_for cart_item, index: cart_item.item.id do |item_form| %>
-            <!--ループ内で生成されるフィールドに一意のインデックスを与えるためのオプション-->
-              <%#= item_form.hidden_field :id, value: cart_item.id%>
-              <%= item_form.number_field :amount, value: cart_item.amount, class: 'form-control', data: { price: cart_item.item.with_tax_price } %>
-            <% end %>
-            <%#= hidden_field_tag "order[item_ids][]", cart_item.item.id %>
-            <%#= f_order.number_field :amount, value: cart_item.amount, class: 'form-control', data: { price: cart_item.item.with_tax_price } %>
-          </td>
-          <td>
-            <span class="price"><%= cart_item.item.with_tax_price * cart_item.amount %>円</span>
-          </td>
-
-          <script>
-
-            const numberFields = document.querySelectorAll("input[name='f_order[amount]']");
-            // `input[name='f_order[amount]']`という名前を持つ全てのinput要素を取得
-            const priceElements = document.querySelectorAll(".price");
-            // `priceElements`というクラス名が指定された要素も取得
-
-            numberFields.forEach((numberField, index) => {
-             // `forEach`メソッドを使用して、`numberFields`配列の各要素に対して関数を実行
-              const priceElement = priceElements[index];
-              // `index`を使用して、`priceElements`配列から対応する要素を取得
-              const pricePerItem = numberField.getAttribute("data-price");
-              // `getAttribute`メソッドを使用して`data-price`属性の値を取得し、商品ごとの価格単価を表しています。
-
-              numberField.addEventListener("change", function() {
-              // `numberField`の`change`イベントに対して、無名関数をリスナーとして追加,`numberField`の値が変更された時に、リスナー内の処理が実行
-                const quantity = parseInt(this.value);
-                // `parseInt`関数を使って`numberField`の値を整数に変換し、`quantity`という変数に代入
-                const price = parseInt(pricePerItem) * quantity;
-                // `parseInt`関数および`quantity`を使って、商品の合計価格を計算します。
-                priceElement.textContent = price.toLocaleString() + "円";
-                // `priceElement`のテキストコンテンツを計算された価格（`price`）に更新
-              });
-            });
-          </script>
-
-          <td><%= button_to "削除する", public_cart_item_path(cart_item), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-danger" %></td>
-        </tr>
-      <% end %>
-    <% else %>
-      <td colspan="6">商品は入っていません。</td>
-    <% end %>
+    <td id="destroy_buttons_<%= destroy.id %>" >
+      <%= render "layouts/destroy", cart_items: cart_items %>
+    </td>
     </tbody>
   </table>
     <div class="row">

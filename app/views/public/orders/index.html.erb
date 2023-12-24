@@ -30,9 +30,7 @@
                 <td>
                   <%= order.charge %>円
                 </td>
-                <td><%= content_tag(:div, class: order.is_receipt ? "text-success" : "text-danger") do %>
-                      <%= order.is_receipt ? content_tag(:strong, "未受け取り") : content_tag(:strong, "受け取り済み") %>
-                    <% end %>
+                <td><%= order.is_receipt_i18n %>
                 </td>
                 <td><%= link_to "表示する", public_order_path(order), class: "btn btn-primary" %></td>
               </tr>
