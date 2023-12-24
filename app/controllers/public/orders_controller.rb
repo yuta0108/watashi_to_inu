@@ -58,11 +58,11 @@ class Public::OrdersController < ApplicationController
   private
 
   def confirm_params
-    params.require(:order).permit(:customer_id, :receipt_date, :receipt_time)
+    params.require(:order).permit(:customer_id, :receipt_date, :receipt_time, cart_item: [])
   end
 
 
   def order_params
-    params.require(:order).permit(:customer_id, :receipt_date, :receipt_time, :charge, :payment_method, :is_receipt, cart_item: [:amount])
+    params.require(:order).permit(:customer_id, :receipt_date, :receipt_time, :charge, :payment_method, :is_receipt, cart_item: {})
   end
 end
