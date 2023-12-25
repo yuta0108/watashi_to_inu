@@ -1,5 +1,5 @@
 class Public::CartItemsController < ApplicationController
-
+  before_action :authenticate_customer!
   before_action :set_cart_item, only: [:create, :update]
 
   def index
@@ -30,13 +30,13 @@ class Public::CartItemsController < ApplicationController
   def destroy_all
     cart_items = current_customer.cart_items
     cart_items.destroy_all
-    # redirect_to public_cart_items_path
+    redirect_to public_cart_items_path
   end
 
   def destroy
     delete_cart_item = CartItem.find(params[:id])
     delete_cart_item.destroy
-    # redirect_to public_cart_items_path
+    redirect_to public_cart_items_path
   end
 
   def update

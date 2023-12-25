@@ -19,11 +19,11 @@
 
     <div class="row justify-content-center">
       <div class="col-md-3 sm-6 mb-4">
-        <h5>姓カナ</h5>
+        <h5>姓(カナ)</h5>
         <%= f.text_field :first_name_kana, class: "form-control", autofocus: true, autocomplete: "first_name_kana" %>
       </div>
       <div class="col-md-3 sm-6 mb-4">
-        <h5>名カナ</h5>
+        <h5>名(カナ)</h5>
         <%= f.text_field :last_name_kana, class: "form-control", autofocus: true, autocomplete: "last_name_kana" %>
       </div>
     </div>
@@ -45,14 +45,14 @@
     <div class="row justify-content-center">
       <div class="col-md-6 sm-8 mb-4">
         <h5>パスワード(6文字以上)</h5>
-        <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+        <%= f.password_field :password, class: "form-control" %>
       </div>
     </div>
 
     <div class="row justify-content-center">
       <div class="col-md-6 sm-8 mb-4">
         <h5>パスワード(確認用)</h5>
-        <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
       </div>
     </div>
 

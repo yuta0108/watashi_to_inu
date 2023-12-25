@@ -4,55 +4,76 @@
 </div>
 
 <div class="container">
-  <% if customer_signed_in? %>
   <%= form_with model: @order, url: public_orders_confirm_path, method: :get, local: true, id:"order_form" do |f_order| %>
-  <div class="row justify-content-center">
-    <div class="col-6">
-      <table class="table table-bordered">
-        <% if @cart_items.present? %>
-          <thead>
-            <tr>
-              <th style="width: 25%; background-color: #a57f5e;">お受け取り日</th>
-              <td style="width: 25%; background-color: white;"><%= f_order.date_field :receipt_date %></td>
-              <!--value="今日の日付-->
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th style="width: 25%; background-color: #a57f5e;">お受け取り可能時間</th>
-              <td style="width: 25%; background-color: white;"><%= f_order.time_field :receipt_time %></td>
-            </tr>
-          </tbody>
-        <% end %>
-      </table>
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <table class="table table-bordered">
+          <% if @cart_items.present? %>
+            <thead>
+              <tr>
+                <th style="width: 25%; background-color: #a57f5e;">お受け取り日</th>
+                <td style="width: 25%; background-color: white;"><%= f_order.date_field :receipt_date %></td>
+                <!--value="今日の日付-->
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th style="width: 25%; background-color: #a57f5e;">お受け取り可能時間</th>
+                <td style="width: 25%; background-color: white;"><%= f_order.time_field :receipt_time %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <td id="destroy_all_buttons_<%= destroy_all.id %>" >
-    <%= render "layouts/destroy_all", cart_items: cart_items %>
-  </td>
-
-  <table class="table table-bordered">
-    <thead>
-      <th style="width: 35%; background-color: #a57f5e;">商品名</th>
-      <th style="background-color: #a57f5e;">単価(税込)</th>
-      <th style="background-color: #a57f5e;">数量</th>
-      <th style="background-color: #a57f5e;">小計</th>
-      <th style="width: 10%; background-color: #a57f5e;">商品を</th>
-    </thead>
-    <tbody>
-    <td id="destroy_buttons_<%= destroy.id %>" >
-      <%= render "layouts/destroy", cart_items: cart_items %>
-    </td>
-    </tbody>
-  </table>
+    <div class="row">
+      <div class="col-2 my-4 ml-auto">
+        <%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete, data: { confirm: '本当に空しますか?' }, class:"btn btn-danger" %>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <th style="width: 35%; background-color: #a57f5e;">商品名</th>
+        <th style="background-color: #a57f5e;">単価(税込)</th>
+        <th style="background-color: #a57f5e;">数量</th>
+        <th style="background-color: #a57f5e;">小計</th>
+        <th style="width: 10%; background-color: #a57f5e;">商品を</th>
+      </thead>
+      <tbody>
+        <% if @cart_items.present? %>
+          <% @cart_items.each do |cart_item| %>
+            <tr class="table-light">
+              <td><%= image_tag cart_item.item.image, style: "width: 60px;" %>　<%= cart_item.item.name %></td>
+              <td><%= cart_item.item.with_tax_price %>円</td>
+              <!--ユーザには表示されない情報`:item_id`パラメータ名を指定：`value: cart_item.item.id`は、隠しフィールドの初期値を指定-->
+              <td>
+                <%= f_order.fields_for cart_item, index: cart_item.item.id do |item_form| %>
+                  <!--ループ内で生成されるフィールドに一意のインデックスを与えるためのオプション-->
+                  <%#= item_form.hidden_field :id, value: cart_item.id%>
+                  <%= item_form.number_field :amount, value: cart_item.amount, class: 'form-control', data: { price: cart_item.item.with_tax_price } %>
+                <% end %>
+                <%#= hidden_field_tag "order[item_ids][]", cart_item.item.id %>
+                <%#= f_order.number_field :amount, value: cart_item.amount, class: 'form-control', data: { price: cart_item.item.with_tax_price } %>
+              </td>
+              <td>
+                <span class="price"><%= cart_item.item.with_tax_price * cart_item.amount %>円</span>
+              </td>
+              <td><%= link_to "削除する", public_cart_item_path(cart_item), method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-danger", style: "word-break: keep-all" %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <td colspan="6">商品は入っていません。</td>
+        <% end %>
+      </tbody>
+    </table>
     <div class="row">
       <div class="col-2 offset-1 mt-4">
         <%= link_to "買い物を続ける", public_items_path, class: "btn btn-primary" %>
       </div>
       <% if @cart_items.present? %>
         <% total_price = 0 %> <!-- 合計金額を保持する変数を初期化 -->
-          <% @cart_items.each do |cart_item| %>
+        <% @cart_items.each do |cart_item| %>
           <!-- 金額を合計変数に加える -->
           <% total_price += cart_item.item.with_tax_price * cart_item.amount %>
         <% end %>
@@ -65,13 +86,12 @@
           </table>
         </div>
       <% end %>
-  <% end %>
     </div>
     <div class="row justify-content-center">
       <% if @cart_items.present? %>
         <div class="col-2 mt-3">
           <a href = "javascript:document.getElementById('order_form').submit()" class = "btn btn-success" >注文手続きに進む</a>
-                    <!--form_withがネストできないために、javascript使用  document: cart_items(画面) getElementById ＝ id:"order_form"-->
+          <!--form_withがネストできないために、javascript使用  document: cart_items(画面) getElementById ＝ id:"order_form"-->
         </div>
       <% end %>
     </div>
