@@ -1,6 +1,5 @@
-<div class="text-center my-5" style="position: relative;">
-  <%= image_tag 'sample-ribbon4.png', size: '450x60' %>
-  <h3 style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);">ショッピングカート</h3>
+<div class="text-center my-5">
+  <h2 class="text-color">ショッピングカート</h2>
 </div>
 
 <div class="container">
@@ -12,14 +11,44 @@
             <thead>
               <tr>
                 <th style="width: 25%; background-color: #a57f5e;">お受け取り日</th>
-                <td style="width: 25%; background-color: white;"><%= f_order.date_field :receipt_date %></td>
-                <!--value="今日の日付-->
+                <td style="width: 25%; background-color: white;"><%= f_order.date_field :receipt_date, class: 'form-control', id: 'order_receipt_date' %>
+
+                <script>
+                  document.getElementById('order_receipt_date').addEventListener('input', function() {
+                    var selectedDate = new Date(this.value);
+                    // `selectedDate.getDay()`を使用して、選択された日付の曜日を取得
+
+                    // 曜日が月曜日である場合
+                    if (selectedDate.getDay() === 1) {
+                      // 曜日が月曜日（`getDay()`の結果が1）である場合
+                      alert('毎週月曜日は定休日の為選択できません。');
+                      this.value = '';  // 日付をクリアするか、前の有効な日付に戻す
+                    }
+                  });
+                </script>
+                </td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th style="width: 25%; background-color: #a57f5e;">お受け取り可能時間</th>
-                <td style="width: 25%; background-color: white;"><%= f_order.time_field :receipt_time %></td>
+                <th style="width: 25%; background-color: #a57f5e;">お受け取り時間</th>
+                <td style="width: 25%; background-color: white;"><%= f_order.time_field :receipt_time, class: 'form-control', step: 1800 %>
+
+                <script>
+                  document.getElementById('order_receipt_time').addEventListener('input', function() {
+                    // 指定された範囲の最小時間と最大時間の間にあるかどうかをチェックする
+                    var selectedTime = new Date('2024-01-01T' + this.value);
+                    var minTime = new Date('2024-01-01T09:00');
+                    var maxTime = new Date('2024-01-01T17:00');
+
+                    if (selectedTime < minTime || selectedTime > maxTime) {
+                      // 選択された時間が指定された範囲外にある場合
+                      alert('営業時間外です。');
+                      this.value = '09:00';  // 最小時間に戻す（または任意のデフォルト値に変更）
+                    }
+                  });
+                </script>
+                </td>
               </tr>
             </tbody>
           <% end %>
@@ -46,15 +75,10 @@
             <tr class="table-light">
               <td><%= image_tag cart_item.item.image, style: "width: 60px;" %>　<%= cart_item.item.name %></td>
               <td><%= cart_item.item.with_tax_price %>円</td>
-              <!--ユーザには表示されない情報`:item_id`パラメータ名を指定：`value: cart_item.item.id`は、隠しフィールドの初期値を指定-->
               <td>
                 <%= f_order.fields_for cart_item, index: cart_item.item.id do |item_form| %>
-                  <!--ループ内で生成されるフィールドに一意のインデックスを与えるためのオプション-->
-                  <%#= item_form.hidden_field :id, value: cart_item.id%>
-                  <%= item_form.number_field :amount, value: cart_item.amount, class: 'form-control', data: { price: cart_item.item.with_tax_price } %>
+                  <%= item_form.number_field :amount, value: cart_item.amount, class: 'form-control', data: { price: cart_item.item.with_tax_price }, min: 1, max: 30 %>
                 <% end %>
-                <%#= hidden_field_tag "order[item_ids][]", cart_item.item.id %>
-                <%#= f_order.number_field :amount, value: cart_item.amount, class: 'form-control', data: { price: cart_item.item.with_tax_price } %>
               </td>
               <td>
                 <span class="price"><%= cart_item.item.with_tax_price * cart_item.amount %>円</span>

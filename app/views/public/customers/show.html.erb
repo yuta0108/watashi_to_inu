@@ -1,6 +1,5 @@
-<div class="text-center my-5" style="position: relative;">
-  <%= image_tag 'sample-ribbon6.png', size: '450x60' %>
-  <h3 style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);">マイページ</h3>
+<div class="text-center my-5">
+  <h2 class="text-color">マイページ</h2>
 </div>
 <div class="container">
   <div class="row justify-content-center">
@@ -40,7 +39,7 @@
   <div class="row justify-content-center">
     <% unless @customer.guest_customer? %>
     <div class="col-2 mt-4 offset-1">
-      <h5>注文履歴</h5>
+      <h5>注文履歴一覧</h5>
     </div>
     <div class="col-2 mt-3">
       <%= link_to "一覧を表示する", public_orders_path, class: "btn btn-primary" %>

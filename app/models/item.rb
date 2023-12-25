@@ -2,11 +2,11 @@ class Item < ApplicationRecord
 
 # 同じバリデーション条件を持つ属性をまとめる
   with_options presence: true do
-      validates :name
-      validates :product_description
-      validates :tax_included_price
-      validates :image
-      validates :genre
+    validates :name
+    validates :product_description
+    validates :tax_included_price
+    validates :image
+    validates :genre
   end
 
   belongs_to :genre

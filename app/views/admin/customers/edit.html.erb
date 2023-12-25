@@ -9,7 +9,7 @@
 </div>
 <div class='container p-5'>
   <%= form_with model: @customer, url: admin_customer_path(id: @customer.id), method: :patch do |f| %>
-    <%= render "public/shared/error_messages", resource: @customer %>
+    <%= render "admin/shared/error_messages", resource: @customer %>
     <div class="row text-center">
       <div class="col mb-4">
         <h5>会員ID : <%= @customer.id %></h5>
@@ -49,18 +49,11 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-md-6 sm-8 mb-4 text-center">
-         <%= f.label :is_active_true, { value: :true } do %>
-        <!--:value`オプションに`:true`を指定-->
-          <%= f.radio_button :is_active, true %>
-          有効会員
-        <% end %>
+        <%= f.label :is_active_true, "有効会員", { value: :true, style: "display: inline-block;", for: "customer_is_active_true" } %>
+        <%= f.radio_button :is_active, true, id: "customer_is_active_true", required: true %>
 
-        <%= f.label :is_active_false, { value: :false } do %>
-        <!--:value`オプションに`:false`を指定-->
-          <%= f.radio_button :is_active, false %>
-          退会済み
-        <% end %>
-
+        <%= f.label :is_active_false, "退会済み", { value: :false, style: "display: inline-block;", for: "customer_is_active_false" } %>
+        <%= f.radio_button :is_active, false, id: "customer_is_active_false", required: true %>
       </div>
     </div>
     <div class="row justify-content-center">

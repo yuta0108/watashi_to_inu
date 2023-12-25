@@ -124,3 +124,6 @@ tr.row-hover:nth-child(even):hover {
   font-size: 30px;
 }
 
+.text-color{
+  color: #a57f5e;
+}

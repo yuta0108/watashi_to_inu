@@ -71,7 +71,7 @@
 </body>
 </html>
 
-  <div class="row mt-5">
+  <div class="row my-5">
     <div class="col-md-8 mx-auto">
       <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
                                     <!--スライドやアニメーションの演出  <!--自動的にカルーセルのスライドが開始,2秒で切り替わる-->
@@ -125,7 +125,32 @@
         center: { lat: 35.17213, lng: 136.91420 },
         zoom: 15
       });
-    }
+
+      // お店の位置
+      var shopLocation = { lat: 35.17213, lng: 136.91420 };
+
+      // マーカーの作成
+      var shopInfo = '<div><strong> わたしといぬ</strong></div>' +
+               '<div><strong>〒000-0000:</strong> 愛知県名古屋市</div>' +
+               '<div><strong>営業時間: 9:00 - 17:00</strong></div>';
+
+      // マーカーの作成
+      var marker = new google.maps.Marker({
+          position: shopLocation,
+          map: map,
+          title: 'わたしといぬ' // マウスを乗せたときに表示されるタイトル
+      });
+
+      // 情報ウィンドウの作成
+      var infowindow = new google.maps.InfoWindow({
+          content: shopInfo
+      });
+
+      // マーカーがクリックされたときに情報ウィンドウを表示
+      marker.addListener('click', function() {
+          infowindow.open(map, marker);
+      });
+          }
   </script>
 
 

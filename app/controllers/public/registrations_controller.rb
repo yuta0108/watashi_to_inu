@@ -3,6 +3,10 @@
 class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, only: [:create]
 
+  def after_sign_in_path_for(public)
+     public_customer_path(current_customer)
+  end
+
   protected
 
   def configure_permitted_parameters

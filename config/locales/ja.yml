@@ -31,7 +31,8 @@ ja:
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
         email: Eメール
-        encrypted_password: 暗号化パスワード
+        encrypted_password: パスワード(確認用)
+        phone_number: 電話番号
         failed_attempts: 失敗したログイン試行回数
         last_sign_in_at: 最終ログイン時刻
         last_sign_in_ip: 最終ログインIPアドレス
@@ -46,8 +47,21 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+      order:
+        receipt_date: お受け取り日
+        receipt_time: お受け取り時間
+      item:
+        name: 商品名
+        product_description: 商品説明
+        tax_included_price: 税抜価格
+        genre: ジャンル
     models:
       customer: 会員
+      admin: 管理者
+      order: 注文
+      item: 商品
+      genre: ジャンル
+      cart_item: カート
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
