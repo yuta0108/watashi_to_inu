@@ -14,26 +14,26 @@
 
       <table class='table table-bordered border-dark'>
         <tr>
-          <th class="table-secondary">会員ID</th>
+          <th style="background-color: #a57f5e;">会員ID</th>
           <td style="width: 60%; background-color: white;"><%= @customer.id%></td>
         </tr>
         <tr>
-          <th class="table-secondary">氏名</th>
+          <th style="background-color: #a57f5e;">氏名</th>
           <td class="table-light"><%= @customer.first_name %><%= @customer.last_name %></td>
         </tr>
         <tr>
-          <th class="table-secondary">カナ</th>
+          <th style="background-color: #a57f5e;">カナ</th>
           <td class="table-light"><%= @customer.first_name_kana %><%= @customer.last_name_kana %></td>
         </tr>
-          <th class="table-secondary">電話番号</th>
+          <th style="background-color: #a57f5e;">電話番号</th>
           <td class="table-light"><%= @customer.phone_number %></td>
         </tr>
         <tr>
-          <th class="table-secondary">メールアドレス</th>
+          <th style="background-color: #a57f5e;">メールアドレス</th>
           <td class="table-light"><%= @customer.email %></td>
         </tr>
         <tr>
-          <th class="table-secondary">会員ステータス </th>
+          <th style="background-color: #a57f5e;">会員ステータス </th>
           <td class="table-light"><%= I18n.t("enums.customer.is_active.#{@customer.is_active}") %></td>
         </tr>
       </table>
