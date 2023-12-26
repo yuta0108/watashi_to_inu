@@ -10,7 +10,7 @@
 <div class='container p-5'>
   <%= form_with model: @customer, url: admin_customer_path(id: @customer.id), method: :patch do |f| %>
     <%= render "admin/shared/error_messages", resource: @customer %>
-    
+
     <div class="row text-center">
       <div class="col mb-4">
         <h5>会員ID : <%= @customer.id %></h5>
@@ -19,21 +19,21 @@
     <div class="row justify-content-center">
       <div class="col-md-3 sm-6 mb-4">
         <h5>姓</h5>
-        <%= f.text_field :first_name, class: "form-control", autofocus: true, autocomplete: "first_name" %>
+        <%= f.text_field :last_name, class: "form-control", autofocus: true, autocomplete: "first_name" %>
       </div>
       <div class="col-md-3 sm-6 mb-4">
         <h5>名</h5>
-        <%= f.text_field :last_name, class: "form-control", autofocus: true, autocomplete: "last_name" %>
+        <%= f.text_field :first_name, class: "form-control", autofocus: true, autocomplete: "last_name" %>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-md-3 sm-6 mb-4">
         <h5>姓カナ</h5>
-        <%= f.text_field :first_name_kana, class: "form-control", autofocus: true, autocomplete: "first_name_kana" %>
+        <%= f.text_field :last_name_kana, class: "form-control", autofocus: true, autocomplete: "first_name_kana" %>
       </div>
       <div class="col-md-3 sm-6 mb-4">
         <h5>名カナ</h5>
-        <%= f.text_field :last_name_kana, class: "form-control", autofocus: true, autocomplete: "last_name_kana" %>
+        <%= f.text_field :first_name_kana, class: "form-control", autofocus: true, autocomplete: "last_name_kana" %>
       </div>
     </div>
     <div class="row justify-content-center">
