@@ -9,7 +9,8 @@ class Item < ApplicationRecord
     validates :genre
   end
 
-  belongs_to :genre
+  # optional varidate あってもなくても大丈夫!
+  belongs_to :genre, optional: true
 
 
   has_many :order_details

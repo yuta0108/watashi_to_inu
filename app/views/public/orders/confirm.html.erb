@@ -71,6 +71,7 @@
         <%= f.hidden_field :customer_id, value: current_customer.id %>
         <%= f.hidden_field :receipt_date, value: @order.receipt_date %>
         <%= f.hidden_field :receipt_time, value: @order.receipt_time %>
+
         <%= f.radio_button :payment_method, :credit_card, checked: true %>
         <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card], {value: :credit_card} %><br>
         <%= f.radio_button :payment_method, :pay_store %>

@@ -9,8 +9,12 @@ class Public::OrdersController < ApplicationController
     # `params[:order][:cart_item]` の各要素に対して処理を行い、`Item` モデルのインスタンスを取得している
     params[:order][:cart_item].each do |item_param|
       item = Item.find(item_param[0])
+      # カートアイテムを特定して変数にいれる
+      cart_item = CartItem.find_by!(customer_id: current_customer, item_id: item.id)
       # `item_param[0]` の値（商品ID）に該当するレコードを検索
       item.amount = item_param[1][:amount].to_i
+      # カートの画面から渡ってきた個数にアイテムの個数を更新
+      cart_item.update!(amount: item.amount)
       # `item_param[1][:amount]` の値（商品の数量）を整数値に変換して代入
       @total_amount += item.amount
       @items << item
