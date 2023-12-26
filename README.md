@@ -15,7 +15,9 @@
 - ドッグカフェでの飲み物や軽食を手軽に持ち帰りたい時。
 - 合間に休憩を取りたい時や、急な予定変更が生じた際に、ドッグカフェのテイクアウト予約を利用したい時。
 ## 設計書
-後ほど作成予定。
+- テスト仕様書作成。
+https://docs.google.com/spreadsheets/d/15MdRufh-VQaZ1XXLDaLFuPPifCmoz70d/edit#gid=2072448154
+
 
 ## 開発環境
 - OS：Linux(CentOS)
