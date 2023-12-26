@@ -5,7 +5,6 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true do
-      validates :is_active
       validates :last_name
       validates :first_name
       validates :last_name_kana

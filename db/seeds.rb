@@ -177,7 +177,7 @@ Item.create!(
  genre_id: 1,
  name: "カップケーキ",
  tax_included_price: 500,
- product_description: "当店では、フランス発祥の美味しいお菓子、マカロンを心を込めてお届けしています。色とりどりの見た目が楽しいだけでなく、一口食べれば広がる濃厚な味わいが、心に幸せな余韻を残します。季節ごとに変わるフレーバーもお楽しみいただけます。",
+ product_description: "新鮮な材料を使用し、丁寧に手作りしたカップケーキで、お客様に幸せなひとときを提供します。",
  image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/app/assets/images/sample-cake4.png"), filename:"sample-cake4.png")
 )
 end
