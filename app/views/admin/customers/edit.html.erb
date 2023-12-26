@@ -10,6 +10,7 @@
 <div class='container p-5'>
   <%= form_with model: @customer, url: admin_customer_path(id: @customer.id), method: :patch do |f| %>
     <%= render "admin/shared/error_messages", resource: @customer %>
+    
     <div class="row text-center">
       <div class="col mb-4">
         <h5>会員ID : <%= @customer.id %></h5>

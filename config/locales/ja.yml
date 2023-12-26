@@ -55,6 +55,7 @@ ja:
         product_description: 商品説明
         tax_included_price: 税抜価格
         genre: ジャンル
+        image: 商品画像
     models:
       customer: 会員
       admin: 管理者

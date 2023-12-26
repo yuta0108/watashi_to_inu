@@ -1,13 +1,7 @@
 <div class="container">
   <div class="row my-3 justify-content-center">
-    <div class="col-4 text-center">
-      <table class="table table-bordered">
-        <thead>
-          <tr style="background-color: #a57f5e;">
-            <th>お受け取り日時</th>
-          </tr>
-        </thead>
-      </table>
+    <div class="col-4 text-center p-1" style="background-color: #a57f5e;">
+      <h4>お受け取り日時</h4>
     </div>
   </div>
   <%= render "public/shared/error_messages", resource: @order %>
@@ -46,20 +40,14 @@
   </div>
   </div>
   <div class="row mt-5 justify-content-center">
-    <div class="col-4 text-center">
-      <table class="table table-bordered">
-        <thead>
-          <tr style="background-color: #a57f5e;">
-            <th>お会計</th>
-          </tr>
-        </thead>
-      </table>
+    <div class="col-4 text-center p-1" style="background-color: #a57f5e;">
+      <h4>お会計</h4>
     </div>
   </div>
   <% total_price = 0 %> <!-- 合計金額を保持する変数を初期化 -->
-    <% @cart_items.each do |cart_item| %>
+    <% @items.each do |item| %>
     <!-- 金額を合計変数に加える -->
-    <% total_price += cart_item.item.with_tax_price * cart_item.amount %>
+    <% total_price += item.with_tax_price * item.amount.to_i %>
   <% end %>
 　<div class="row mt-3">
 　  <div class="col-5 ml-auto">
@@ -73,14 +61,8 @@
 　</div>
 
 　<div class="row mt-5 justify-content-center">
-    <div class="col-4 text-center">
-      <table class="table table-bordered">
-        <thead>
-          <tr style="background-color: #a57f5e;">
-            <th>支払方法</th>
-          </tr>
-        </thead>
-      </table>
+    <div class="col-4 text-center p-1" style="background-color: #a57f5e;">
+      <h4>お支払方法</h4>
     </div>
   </div>
   <div class="row mt-3">
