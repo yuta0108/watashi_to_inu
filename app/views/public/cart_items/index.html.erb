@@ -26,7 +26,7 @@
                     }
                   });
                 </script>
-                
+
                 </td>
               </tr>
             </thead>
@@ -49,7 +49,7 @@
                     }
                   });
                 </script>
-                
+
                 </td>
               </tr>
             </tbody>
@@ -78,7 +78,7 @@
           <% @cart_items.each do |cart_item| %>
             <tr class="table-light">
               <td><%= image_tag cart_item.item.image, style: "width: 60px;" %>　<%= cart_item.item.name %></td>
-              <td><%= cart_item.item.with_tax_price %>円</td>
+              <td><%= order_detail.tax_included_price*1.1 %>円</td>
               <td>
                 <%= f_order.fields_for cart_item, index: cart_item.item.id do |item_form| %>
                   <%= item_form.number_field :amount, value: cart_item.amount, class: 'form-control', data: { price: cart_item.item.with_tax_price }, min: 1, max: 30 %>

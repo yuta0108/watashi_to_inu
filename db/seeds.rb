@@ -14,91 +14,91 @@ end
 
 if Customer.count.zero?
 Customer.create!(
-  last_name: '太郎',
-  first_name: '令和',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'レイワ',
+  last_name: '令和',
+  first_name: '太郎',
+  last_name_kana: 'レイワ',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'email@gmail.com',
   phone_number: '0123456789'
  )
 Customer.create!(
- last_name: '太郎',
-  first_name: '平成',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'ヘイセイ',
+ last_name: '平成',
+  first_name: '太郎',
+  last_name_kana: 'ヘイセイ',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'aaa@aaa',
   phone_number: '9876543210'
  )
  Customer.create!(
-  last_name: '太郎',
-  first_name: '昭和',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'ショウワ',
+  last_name: '昭和',
+  first_name: '太郎',
+  last_name_kana: 'ショウワ',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'bbb@bbb',
   phone_number: '0912345678'
  )
  Customer.create!(
-  last_name: '太郎',
-  first_name: '大正',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'タイショウ',
+  last_name: '大正',
+  first_name: '太郎',
+  last_name_kana: 'タイショウ',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'ccc@ccc',
   phone_number: '081234567'
  )
  Customer.create!(
-  last_name: '太郎',
-  first_name: '明治',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'メイジ',
+  last_name: '明治',
+  first_name: '太郎',
+  last_name_kana: 'メイジ',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'ddd@ddd',
   phone_number: '0712345678'
  )
  Customer.create!(
-  last_name: '太郎',
-  first_name: '江戸',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'エド',
+  last_name: '江戸',
+  first_name: '太郎',
+  last_name_kana: 'エド',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'eee@eee',
   phone_number: '0612345678'
  )
  Customer.create!(
-  last_name: '太郎',
-  first_name: '安土桃山',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'アヅチモモヤマ',
+  last_name: '安土桃山',
+  first_name: '太郎',
+  last_name_kana: 'アヅチモモヤマ',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'fff@fff',
   phone_number: '0512345678'
  )
  Customer.create!(
-  last_name: '太郎',
-  first_name: '戦国',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'センゴク',
+  last_name: '戦国',
+  first_name: '太郎',
+  last_name_kana: 'センゴク',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'ggg@ggg',
   phone_number: '04512345678'
  )
  Customer.create!(
-  last_name: '太郎',
-  first_name: '室町',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'ムロマチ',
+  last_name: '室町',
+  first_name: '太郎',
+  last_name_kana: 'ムロマチ',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'hhh@hhh',
   phone_number: '0312345678'
  )
  Customer.create!(
-  last_name: '太郎',
-  first_name: '鎌倉',
-  last_name_kana: 'タロウ',
-  first_name_kana: 'カマクラ',
+  last_name: '鎌倉',
+  first_name: '太郎',
+  last_name_kana: 'カマクラ',
+  first_name_kana: 'タロウ',
   password: '111111',
   email: 'iii@iii',
   phone_number: '0212345678'

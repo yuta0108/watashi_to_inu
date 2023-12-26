@@ -33,7 +33,7 @@
       <table class='table table-bordered border-dark'>
         <tr style="background-color: #a57f5e;">
           <th>商品名</th>
-          <th>単価(税抜)</th>
+          <th>単価(税込)</th>
           <th>数量</th>
           <th>小計</th>
         </tr>
@@ -41,9 +41,9 @@
         <% @order_details.each do |order_detail| %>
           <tr>
             <td style="width: 55%; background-color: white;"><%= order_detail.item.name %></td>
-            <td style="width: 20%; background-color: white;"><%= order_detail.tax_included_price %>円</td>
+            <td style="width: 20%; background-color: white;"><%= (order_detail.tax_included_price*1.1).floor %>円</td>
             <td class="table-light"><%= order_detail.amount %></td>
-            <td class="table-light"><%= order_detail.amount * order_detail.tax_included_price %>円</td>
+            <td class="table-light"><%= order_detail.amount * (order_detail.tax_included_price*1.1).floor %>円</td>
           </tr>
         <% end %>
       </table>

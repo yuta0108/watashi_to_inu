@@ -16,9 +16,9 @@
         <tbody>
           <% @orders.each do |order| %>
             <tr class="table-light">
-              <td><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M'), admin_order_path(order) %></td>
+              <td><%= link_to order.receipt_date, admin_order_path(order) %></td>
               <td>
-                <%= order.customer.first_name %> <%= order.customer.last_name %>
+                <%= order.customer.last_name %> <%= order.customer.first_name %>
               </td>
               <td><%= order.order_details.sum(:amount) %></td>
               <td><%= order.is_receipt_i18n %>

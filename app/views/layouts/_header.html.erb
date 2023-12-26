@@ -20,7 +20,7 @@
     </script>
 
     <% if customer_signed_in? %>
-      <div class="text-dark">ようこそ <%= current_customer.first_name + current_customer.last_name %>さん！</div>
+      <div class="text-dark">ようこそ <%= current_customer.last_name + current_customer.first_name %>さん！</div>
     <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
