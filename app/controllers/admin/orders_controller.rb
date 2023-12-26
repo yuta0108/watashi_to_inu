@@ -17,7 +17,7 @@ class Admin::OrdersController < ApplicationController
     @order_details = @order.order_details
     @order.update(order_params)
 
-    params[:order][:cart_item].each do |item_param|
+    params[:order][:cart_item] do |item_param|
       cart_item = CartItem.find_by!(customer_id: current_customer, item_id: item.id)
       cart_item.update!(amount: item.amount)
     end
