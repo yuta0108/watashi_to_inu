@@ -20,30 +20,30 @@
   <div id="container">
     <div class="row">
       <div class="my-item">
-        <%= image_tag("sample-dog1.jpg", width: "300", height: "260") %>
+        <%= image_tag("sample-dog1.jpg", width: "310", height: "260") %>
       </div>
       <div class="my-item">
-        <%= image_tag("sample-food1.jpg", width: "300", height: "260") %>
+        <%= image_tag("sample-food1.jpg", width: "310", height: "260") %>
       </div>
       <div class="my-item">
-        <%= image_tag("sample-coffee2.jpg", width: "300", height: "260") %>
+        <%= image_tag("sample-coffee2.jpg", width: "310", height: "260") %>
       </div>
       <div class="my-item">
-        <%= image_tag("sample-cake1.png", width: "300", height: "260") %>
+        <%= image_tag("sample-cake1.png", width: "310", height: "260") %>
       </div>
     </div>
     <div class="row">
       <div class="my-item">
-        <%= image_tag("sample-building1.jpg", width: "300", height: "260") %>
+        <%= image_tag("sample-building1.jpg", width: "310", height: "260") %>
       </div>
       <div class="my-item">
-        <%= image_tag("sample-building3.jpg", width: "300", height: "260") %>
+        <%= image_tag("sample-building3.jpg", width: "310", height: "260") %>
       </div>
       <div class="my-item">
-        <%= image_tag("sample-building4.jpg", width: "300", height: "260") %>
+        <%= image_tag("sample-building4.jpg", width: "310", height: "260") %>
       </div>
       <div class="my-item">
-        <%= image_tag("sample-building2.jpg", width: "300", height: "260") %>
+        <%= image_tag("sample-building2.jpg", width: "310", height: "260") %>
       </div>
     </div>
   </div>
@@ -80,7 +80,7 @@
     <div class="col">
       <div class="row">
         <% @items.each do |item| %>
-          <div class="col-md-4-sm-6 mb-4">
+          <div class="col mb-4">
             <%= link_to public_item_path(item.id) do%>
               <div class="card border-0 shadow-sm" style="width: 10rem;">
                 <%= image_tag item.image, class: "card-img-top rounded hover-zoom", style: "object-fit: cover; width: 100%; height: 7rem;" %>
