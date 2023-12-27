@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 p-5">
   <div class="row-4 mx-5 rounded-lg text-center">
     <div class="col mb-4">
       <h3>本当に退会しますか？</h3>
@@ -8,9 +8,9 @@
       <h5>これまでの購入履歴が閲覧できなくなります。</h5><br>
       <h5>退会する場合は、「退会する」をクリックしてください。</h5><br>
     </div>
-    <div class="col">
-      <%= link_to '退会しない', public_customer_path(@customer), class: 'btn btn-primary mr-4' %>
-      <%= link_to "退会する", public_customers_unsubscribe_path, method: :patch, class: 'btn btn-danger', data: { confirm: '本当に退会しますか？' } %>
+    <div class="col mb-4">
+      <%= link_to '退会しない', public_customer_path(@customer), class: 'btn btn-primary mr-4', style: "word-break: keep-all" %>
+      <%= link_to "退会する", public_customers_unsubscribe_path, method: :patch, class: 'btn btn-danger', data: { confirm: '本当に退会しますか？' }, style: "word-break: keep-all" %>
     </div>
   </div>
 </div>

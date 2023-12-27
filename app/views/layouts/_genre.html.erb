@@ -8,7 +8,7 @@
     <% genres.each do |genre| %>
     <tr class="row-hover rounded-corners">
       <td>
-        <%= link_to genre.name, public_items_path(genre_id: genre.id), method: :get, class: "text-decoration-none text-dark" %>
+        <%= link_to genre.name, public_items_path(genre_id: genre.id), method: :get, class: "text-decoration-none text-dark", style: "word-break: keep-all" %>
       </td>
     </tr>
     <% end %>

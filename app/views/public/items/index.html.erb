@@ -18,7 +18,7 @@
     <div class="col">
       <div class="row">
         <% @items.each do |item| %>
-          <div class="col-3 mb-4">
+          <div class="col-md-3 xs-6 mb-4 col-sm-6">
             <%= link_to public_item_path(item.id) do%>
               <div class="card border-0 shadow-sm" style="width: 10rem;">
                 <%= image_tag item.image, class: "card-img-top rounded hover-zoom", style: "object-fit: cover; width: 100%; height: 7rem;" %>

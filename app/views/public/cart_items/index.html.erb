@@ -61,7 +61,7 @@
     <% if @cart_items.present? %>
       <div class="row">
         <div class="col-2 my-4 ml-auto">
-          <%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete, data: { confirm: '本当に空しますか?' }, class:"btn btn-danger" %>
+          <%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete, data: { confirm: '本当に空しますか?' }, class:"btn btn-danger", style: "word-break: keep-all" %>
         </div>
       </div>
     <% end %>
@@ -97,7 +97,7 @@
     </table>
     <div class="row">
       <div class="col-2 offset-1 mt-4">
-        <%= link_to "買い物を続ける", public_items_path, class: "btn btn-primary" %>
+        <%= link_to "買い物を続ける", public_items_path, class: "btn btn-primary", style: "word-break: keep-all" %>
       </div>
       <% if @cart_items.present? %>
         <% total_price = 0 %> <!-- 合計金額を保持する変数を初期化 -->
@@ -118,7 +118,7 @@
     <div class="row justify-content-center">
       <% if @cart_items.present? %>
         <div class="col-2 mt-3">
-          <a href = "javascript:document.getElementById('order_form').submit()" class = "btn btn-success" >注文手続きに進む</a>
+          <a href="javascript:document.getElementById('order_form').submit()" class="btn btn-success" style="word-break: keep-all">注文手続きに進む</a>
           <!--form_withがネストできないために、javascript使用  document: cart_items(画面) getElementById ＝ id:"order_form"-->
         </div>
       <% end %>
