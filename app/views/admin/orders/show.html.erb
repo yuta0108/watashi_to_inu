@@ -1,5 +1,5 @@
 <div class="text-center my-5">
-  <h3><%= @order.customer.first_name %><%= @order.customer.last_name %> 様の注文履歴</h3>
+  <h3><%= @order.customer.last_name %><%= @order.customer.first_name %> 様の注文履歴</h3>
 </div>
 <div class="container">
   <div class="row">
@@ -7,7 +7,7 @@
       <table class="table table-borderless">
         <tr>
           <th style="width:10%; background-color: #a57f5e;">購入者</th>
-          <td style="width:30%; background-color: white;"><%= link_to @order.customer.first_name + " " + @order.customer.last_name, admin_customer_path(@customer) %></td>
+          <td style="width:30%; background-color: white;"><%= link_to @order.customer.last_name + " " + @order.customer.first_name, admin_customer_path(@customer) %></td>
         </tr>
         <tr>
           <th style="background-color: #a57f5e;">注文日</th>
