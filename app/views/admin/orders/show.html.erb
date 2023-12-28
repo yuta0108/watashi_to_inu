@@ -53,8 +53,8 @@
             <td class="table-light"><%= order_detail.amount %></td>
             <td class="table-light"><%= ((order_detail.tax_included_price*1.1)*(order_detail.amount)).floor %>円</td>
             <td class="table-light">
-              <%= form_with model: @order_detail, url: admin_order_detail_path(@order_detail), method: :patch do |f| %>
-                <%= f.select :production_status, options_for_select(OrderDetail.production_statuses_i18n.map {|key, value| [value, key]}, @order_detail.production_status),{class:"form-control"} %>
+              <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch do |f| %>
+                <%= f.select :production_status, options_for_select(OrderDetail.production_statuses_i18n.map {|key, value| [value, key]}, order_detail.production_status),{class:"form-control"} %>
                 <%= f.submit '更新', class:"btn btn-success" %>
               <% end %>
             </td>

@@ -5,6 +5,7 @@ class Admin::OrderDetailsController < ApplicationController
     @order_detail = OrderDetail.find(params[:id])
     @order = @order_detail.order
 
+
     previous_production_status = @order_detail.production_status_before_last_save
     # 最後の保存前の`@order_detail`の`production_status`を`previous_production_status`に代入
     @order_detail.update(order_detail_params)
