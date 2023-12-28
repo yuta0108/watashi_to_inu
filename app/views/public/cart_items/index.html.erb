@@ -5,7 +5,9 @@
 <div class="container">
   <%= form_with model: @order, url: public_orders_confirm_path, method: :get, local: true, id:"order_form" do |f_order| %>
     <div class="row justify-content-center">
-      <div class="col-6">
+      <div class="col-7">
+        <span style="color: red;"><h5>＊お受け取り日は今日以降を選択してください。</h5></span>
+        <span style="color: red;"><h5>＊お受け取り時間は現在時間＋1時間後の時間を選択してください。</h5></span>
         <table class="table table-bordered">
           <% if @cart_items.present? %>
             <thead>
@@ -16,15 +18,27 @@
                 <script>
                   document.getElementById('order_receipt_date').addEventListener('input', function() {
                     var selectedDate = new Date(this.value);
-                    // `selectedDate.getDay()`を使用して、選択された日付の曜日を取得
+                    var today = new Date();  // Get current date
 
-                    // 曜日が月曜日である場合
+                    // Compare selected date with today's date
+                    if (selectedDate < today && !isSameDay(selectedDate, today)) {
+                      alert('過去の日付は選択できません。');
+                      this.value = '';  // Clear the date or set it to a valid future date
+                    }
+
+                    // Check if the selected date is a Monday
                     if (selectedDate.getDay() === 1) {
-                      // 曜日が月曜日（`getDay()`の結果が1）である場合
                       alert('毎週月曜日は定休日の為選択できません。');
-                      this.value = '';  // 日付をクリアするか、前の有効な日付に戻す
+                      this.value = '';  // Clear the date or set it to a valid future date
                     }
                   });
+
+                  // Function to check if two dates are on the same day
+                  function isSameDay(date1, date2) {
+                    return date1.getFullYear() === date2.getFullYear() &&
+                           date1.getMonth() === date2.getMonth() &&
+                           date1.getDate() === date2.getDate();
+                  }
                 </script>
 
                 </td>
@@ -36,16 +50,36 @@
                 <td style="width: 25%; background-color: white;"><%= f_order.time_field :receipt_time, class: 'form-control', step: 1800 %>
 
                 <script>
+                  // 現在の時刻を取得
+                  var currentTime = new Date();
+                  var currentHours = currentTime.getHours();
+                  var currentMinutes = currentTime.getMinutes();
+
+                  // 現在の時刻を指定された形式に変換
+                  var currentFormattedTime = (currentHours < 10 ? '0' : '') + currentHours + ':' + (currentMinutes < 10 ? '0' : '') + currentMinutes;
+
                   document.getElementById('order_receipt_time').addEventListener('input', function() {
                     // 指定された範囲の最小時間と最大時間の間にあるかどうかをチェックする
                     var selectedTime = new Date('2024-01-01T' + this.value);
-                    var minTime = new Date('2024-01-01T09:00');
-                    var maxTime = new Date('2024-01-01T17:00');
+                    var minTime = new Date('2024-01-01T' + currentFormattedTime);
 
-                    if (selectedTime < minTime || selectedTime > maxTime) {
+                    // 一時間後の時刻を計算
+                    var oneHourLater = new Date(minTime.getTime() + (60 * 60 * 1000));
+
+                    var maxTime = new Date('2024-01-01T24:00');
+
+                    if (selectedTime < oneHourLater || selectedTime > maxTime) {
                       // 選択された時間が指定された範囲外にある場合
-                      alert('営業時間外です。');
-                      this.value = '09:00';  // 最小時間に戻す（または任意のデフォルト値に変更）
+                      if (selectedTime < oneHourLater) {
+                        alert('現在の時間より1時間後の時間を選択してください。');
+
+                        // Set the input value to one hour later than the current time
+                        var oneHourLaterFormatted = (oneHourLater.getHours() < 10 ? '0' : '') + oneHourLater.getHours() + ':' + (oneHourLater.getMinutes() < 10 ? '0' : '') + oneHourLater.getMinutes();
+                        this.value = oneHourLaterFormatted;
+                      } else {
+                        alert('営業時間外です.');
+                        // Optionally, you can add code here to handle the invalid time case without resetting the input value
+                      }
                     }
                   });
                 </script>
@@ -61,7 +95,7 @@
     <% if @cart_items.present? %>
       <div class="row">
         <div class="col-2 my-4 ml-auto">
-          <%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete, data: { confirm: '本当に空しますか?' }, class:"btn btn-danger", style: "word-break: keep-all" %>
+          <%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete, data: { confirm: '本当に空にしますか?' }, class:"btn btn-danger", style: "word-break: keep-all" %>
         </div>
       </div>
     <% end %>
