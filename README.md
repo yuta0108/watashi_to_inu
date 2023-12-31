@@ -15,6 +15,9 @@
 - ドッグカフェでの飲み物や軽食を手軽に持ち帰りたい時。
 - 合間に休憩を取りたい時や、急な予定変更が生じた際に、ドッグカフェのテイクアウト予約を利用したい時。
 ## 設計書
+<img width="503" alt="image" src="https://github.com/yuta0108/watashi_to_inu/assets/144692127/bdcff226-487f-4b7b-b470-b8fc1614fa4b">
+
+
 - テスト仕様書作成。
 https://docs.google.com/spreadsheets/d/15MdRufh-VQaZ1XXLDaLFuPPifCmoz70d/edit#gid=2072448154
 
