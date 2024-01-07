@@ -17,8 +17,13 @@
 ## 設計書
 <img width="503" alt="image" src="https://github.com/yuta0108/watashi_to_inu/assets/144692127/bdcff226-487f-4b7b-b470-b8fc1614fa4b">
 
-
-- テスト仕様書作成。
+- テーブル定義書
+https://docs.google.com/spreadsheets/d/1A-XbLyVG4b9qThye9zTMita43ZPiVY4y/edit#gid=136342688
+- アプリケーション詳細設計書
+https://docs.google.com/spreadsheets/d/1T9rOXa9jaQp7WpCuv9R_eiXWU6Rjgw3H95EGOJxLt3U/edit#gid=549108681
+- 画面遷移図
+https://www.figma.com/file/fMaGVuUaL3XDsFVlMhChhJ/%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA?type=design&node-id=0-1&mode=design&t=qNX3ehidx0OzoKeQ-0
+- テスト仕様書
 https://docs.google.com/spreadsheets/d/15MdRufh-VQaZ1XXLDaLFuPPifCmoz70d/edit#gid=2072448154
 
 
