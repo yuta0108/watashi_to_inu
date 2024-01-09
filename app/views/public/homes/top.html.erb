@@ -87,13 +87,18 @@
                 <!--rounded:画像に丸みを帯びたスタイル--> <!--`object-fit: cover;`のスタイルは、画像のアスペクト比を維持しながら要素のサイズに合わせて画像をリサイズする-->
                 <div class="card-body">
             <% end %>
-                <h5 class="card-title"><%= item.name %></h5>
-                <p class="card-text"><%= (item.tax_included_price * 1.1).floor %>円 (税込)</p>
+                  <h5 class="card-title"><%= item.name %></h5>
+                  <p class="card-text"><%= (item.tax_included_price * 1.1).floor %>円 (税込)</p>
+                </div>
               </div>
-            </div>
           </div>
         <% end %>
       </div>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col">
+      <%= link_to "すべての商品を表示する" ,public_items_path %>
     </div>
   </div>
 </div>
