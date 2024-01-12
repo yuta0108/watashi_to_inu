@@ -56,7 +56,11 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_details = OrderDetail.where(order_id: @order.id)
+    if @order.customer_id == current_customer.id
+      @order_details = OrderDetail.where(order_id: @order.id)
+    else
+      redirect_to public_orders_path
+    end
   end
 
   private
