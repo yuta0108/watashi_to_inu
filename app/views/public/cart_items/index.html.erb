@@ -11,82 +11,53 @@
         <table class="table table-bordered">
           <% if @cart_items.present? %>
             <thead>
-              <tr>
-                <th style="width: 25%; background-color: #a57f5e;">お受け取り日</th>
-                <td style="width: 25%; background-color: white;"><%= f_order.date_field :receipt_date, class: 'form-control', id: 'order_receipt_date' %>
+              <thead>
+                <tr>
+                  <th style="width: 25%; background-color: #a57f5e;">お受け取り日</th>
+                  <td style="width: 25%; background-color: white;">
+                    <%= f_order.date_field :receipt_date, class: 'form-control', id: 'order_receipt_date' %>
 
-                <script>
-                  document.getElementById('order_receipt_date').addEventListener('input', function() {
-                    var selectedDate = new Date(this.value);
-                    var today = new Date();  // Get current date
+                    <script>
+                      document.getElementById('order_receipt_date').addEventListener('input', function() {
+                        var selectedDate = new Date(this.value);
+                        var today = new Date();  // Get current date
 
-                    // Compare selected date with today's date
-                    if (selectedDate < today && !isSameDay(selectedDate, today)) {
-                      alert('過去の日付は選択できません。');
-                      this.value = '';  // Clear the date or set it to a valid future date
-                    }
+                        // Compare selected date with today's date
+                        if (selectedDate < today) {
+                          alert('過去の日付は選択できません。');
+                          this.value = '';  // Clear the date or set it to a valid future date
+                        } else {
+                          enableTimeSelection();  // Enable time selection for future dates
+                        }
 
-                    // Check if the selected date is a Monday
-                    if (selectedDate.getDay() === 1) {
-                      alert('毎週月曜日は定休日の為選択できません。');
-                      this.value = '';  // Clear the date or set it to a valid future date
-                    }
-                  });
+                        // Check if the selected date is a Monday
+                        if (selectedDate.getDay() === 1) {
+                          alert('毎週月曜日は定休日の為選択できません。');
+                          this.value = '';  // Clear the date or set it to a valid future date
+                        }
+                      });
 
-                  // Function to check if two dates are on the same day
-                  function isSameDay(date1, date2) {
-                    return date1.getFullYear() === date2.getFullYear() &&
-                           date1.getMonth() === date2.getMonth() &&
-                           date1.getDate() === date2.getDate();
-                  }
-                </script>
-
-                </td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th style="width: 25%; background-color: #a57f5e;">お受け取り時間</th>
-                <td style="width: 25%; background-color: white;"><%= f_order.time_field :receipt_time, class: 'form-control', step: 1800 %>
-
-                <script>
-                  // 現在の時刻を取得
-                  var currentTime = new Date();
-                  var currentHours = currentTime.getHours();
-                  var currentMinutes = currentTime.getMinutes();
-
-                  // 現在の時刻を指定された形式に変換
-                  var currentFormattedTime = (currentHours < 10 ? '0' : '') + currentHours + ':' + (currentMinutes < 10 ? '0' : '') + currentMinutes;
-
-                  document.getElementById('order_receipt_time').addEventListener('input', function() {
-                    // 指定された範囲の最小時間と最大時間の間にあるかどうかをチェックする
-                    var selectedTime = new Date('2024-01-01T' + this.value);
-                    var minTime = new Date('2024-01-01T' + currentFormattedTime);
-
-                    // 一時間後の時刻を計算
-                    var oneHourLater = new Date(minTime.getTime() + (60 * 60 * 1000));
-
-                    var maxTime = new Date('2024-01-01T24:00');
-
-                    if (selectedTime < oneHourLater || selectedTime > maxTime) {
-                      // 選択された時間が指定された範囲外にある場合
-                      if (selectedTime < oneHourLater) {
-                        alert('現在の時間より1時間後の時間を選択してください。');
-
-                        // Set the input value to one hour later than the current time
-                        var oneHourLaterFormatted = (oneHourLater.getHours() < 10 ? '0' : '') + oneHourLater.getHours() + ':' + (oneHourLater.getMinutes() < 10 ? '0' : '') + oneHourLater.getMinutes();
-                        this.value = oneHourLaterFormatted;
-                      } else {
-                        alert('営業時間外です.');
-                        // Optionally, you can add code here to handle the invalid time case without resetting the input value
+                      function enableTimeSelection() {
+                        document.getElementById('order_receipt_time').removeAttribute('disabled');
                       }
-                    }
-                  });
-                </script>
+                    </script>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th style="width: 25%; background-color: #a57f5e;">お受け取り時間</th>
+                  <td style="width: 25%; background-color: white;">
+                    <%= f_order.time_field :receipt_time, class: 'form-control', step: 1800, disabled: true, id: 'order_receipt_time' %>
 
-                </td>
-              </tr>
-            </tbody>
+                    <script>
+                      document.getElementById('order_receipt_time').addEventListener('input', function() {
+                        // 時間指定の制限が必要な場合はここに追加
+                      });
+                    </script>
+                  </td>
+                </tr>
+              </tbody>
           <% end %>
         </table>
       </div>
