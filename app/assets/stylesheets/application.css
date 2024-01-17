@@ -13,7 +13,17 @@
  *= require_tree .
  *= require_self
  */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ビューポートの高さいっぱいに広がるようにする */
+  background-color: #ead3ac;
+  font-family: 'Yusei Magic', sans-serif;
+}
 
+footer {
+  margin-top: auto; /* 上部の余白を自動的に調整し、フッターが一番下に固定される */
+}
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -50,10 +60,6 @@
   transform: scale(1.1);
 }
 
-body {
-  background-color: #ead3ac;
-  font-family: 'Yusei Magic', sans-serif;
-}
 
 /* ページネーション全体のスタイル */
 .pagination {
@@ -123,4 +129,6 @@ tr.row-hover:nth-child(even):hover {
 .fa-square-instagram{
   font-size: 30px;
 }
+
+
 
