@@ -11,53 +11,52 @@
         <table class="table table-bordered">
           <% if @cart_items.present? %>
             <thead>
-              <thead>
-                <tr>
-                  <th style="width: 25%; background-color: #a57f5e;">お受け取り日</th>
-                  <td style="width: 25%; background-color: white;">
-                    <%= f_order.date_field :receipt_date, class: 'form-control', id: 'order_receipt_date' %>
+              <tr>
+                <th style="width: 25%; background-color: #a57f5e;">お受け取り日</th>
+                <td style="width: 25%; background-color: white;">
+                  <%= f_order.date_field :receipt_date, class: 'form-control', id: 'order_receipt_date' %>
 
-                    <script>
-                      document.getElementById('order_receipt_date').addEventListener('input', function() {
-                        var selectedDate = new Date(this.value);
-                        var today = new Date();  // Get current date
+                  <script>
+                    document.getElementById('order_receipt_date').addEventListener('input', function() {
+                      var selectedDate = new Date(this.value);
+                      var today = new Date();  // Get current date
 
-                        // Compare selected date with today's date
-                        if (selectedDate < today) {
-                          alert('過去の日付は選択できません。');
-                          this.value = '';  // Clear the date or set it to a valid future date
-                        } else {
-                          enableTimeSelection();  // Enable time selection for future dates
-                        }
-
-                        // Check if the selected date is a Monday
-                        if (selectedDate.getDay() === 1) {
-                          alert('毎週月曜日は定休日の為選択できません。');
-                          this.value = '';  // Clear the date or set it to a valid future date
-                        }
-                      });
-
-                      function enableTimeSelection() {
-                        document.getElementById('order_receipt_time').removeAttribute('disabled');
+                      // Compare selected date with today's date
+                      if (selectedDate < today) {
+                        alert('過去の日付は選択できません。');
+                        this.value = '';  // Clear the date or set it to a valid future date
+                      } else {
+                        enableTimeSelection();  // Enable time selection for future dates
                       }
-                    </script>
-                  </td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th style="width: 25%; background-color: #a57f5e;">お受け取り時間</th>
-                  <td style="width: 25%; background-color: white;">
-                    <%= f_order.time_field :receipt_time, class: 'form-control', step: 1800, disabled: true, id: 'order_receipt_time' %>
 
-                    <script>
-                      document.getElementById('order_receipt_time').addEventListener('input', function() {
-                        // 時間指定の制限が必要な場合はここに追加
-                      });
-                    </script>
-                  </td>
-                </tr>
-              </tbody>
+                      // Check if the selected date is a Monday
+                      if (selectedDate.getDay() === 1) {
+                        alert('毎週月曜日は定休日の為選択できません。');
+                        this.value = '';  // Clear the date or set it to a valid future date
+                      }
+                    });
+
+                    function enableTimeSelection() {
+                      document.getElementById('order_receipt_time').removeAttribute('disabled');
+                    }
+                  </script>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th style="width: 25%; background-color: #a57f5e;">お受け取り時間</th>
+                <td style="width: 25%; background-color: white;">
+                  <%= f_order.time_field :receipt_time, class: 'form-control', step: 1800, disabled: true, id: 'order_receipt_time' %>
+
+                  <script>
+                    document.getElementById('order_receipt_time').addEventListener('input', function() {
+                      // 時間指定の制限が必要な場合はここに追加
+                    });
+                  </script>
+                </td>
+              </tr>
+            </tbody>
           <% end %>
         </table>
       </div>
