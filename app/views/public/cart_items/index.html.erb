@@ -19,25 +19,41 @@
                   <script>
                     document.getElementById('order_receipt_date').addEventListener('input', function() {
                       var selectedDate = new Date(this.value);
-                      var today = new Date();  // Get current date
+                      //入力フィールド ('order_receipt_date') の値を取得し、Dateそこから新しいオブジェクトを作成
+                      var today = new Date();
+                      today.setHours(0, 0, 0, 0);
+                      //setHours(0, 0, 0, 0)選択した日付と正確に比較できるように、時刻を午前 0 時 (00:00:00) に設定するために使用
 
-                      // Compare selected date with today's date
                       if (selectedDate < today) {
                         alert('過去の日付は選択できません。');
-                        this.value = '';  // Clear the date or set it to a valid future date
+                        this.value = '';
                       } else {
-                        enableTimeSelection();  // Enable time selection for future dates
+                        enableTimeSelection();
                       }
 
-                      // Check if the selected date is a Monday
                       if (selectedDate.getDay() === 1) {
+                      //選択した日付が月曜日に対応するかどうかをチェック
                         alert('毎週月曜日は定休日の為選択できません。');
-                        this.value = '';  // Clear the date or set it to a valid future date
+                        this.value = '';
                       }
                     });
 
                     function enableTimeSelection() {
-                      document.getElementById('order_receipt_time').removeAttribute('disabled');
+                      var timeInput = document.getElementById('order_receipt_time');
+                      timeInput.removeAttribute('disabled');
+                      //時間入力フィールドから「無効」属性を削除し、編集可能
+
+                      var currentTime = new Date();
+                      //現在の日付と時刻を表す新しいDateオブジェクトを作成
+                      var selectedTime = new Date(this.value + ' ' + timeInput.value);
+                      //日付値:this.value,要素からの時刻値を組み合わせて、新しいオブジェクトを構築:timeInput
+
+                      if (currentTime > selectedTime) {
+                        // 現在時刻が選択した時刻より遅いかどうかを確認
+                        alert('過去の時間は選択できません。');
+                        timeInput.value = '';
+                        //入力された時間の値をクリア
+                      }
                     }
                   </script>
                 </td>
@@ -48,12 +64,6 @@
                 <th style="width: 25%; background-color: #a57f5e;">お受け取り時間</th>
                 <td style="width: 25%; background-color: white;">
                   <%= f_order.time_field :receipt_time, class: 'form-control', step: 1800, disabled: true, id: 'order_receipt_time' %>
-
-                  <script>
-                    document.getElementById('order_receipt_time').addEventListener('input', function() {
-                      // 時間指定の制限が必要な場合はここに追加
-                    });
-                  </script>
                 </td>
               </tr>
             </tbody>
